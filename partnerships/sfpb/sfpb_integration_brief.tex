@@ -1,0 +1,544 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathpazo}
+\usepackage[scaled=0.92]{helvet}
+\usepackage[margin=1in,headheight=14pt]{geometry}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{abstract}
+\usepackage{parskip}
+\usepackage{lastpage}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\definecolor{luxblue}{HTML}{0B2545}
+\definecolor{luxaccent}{HTML}{2D6A4F}
+\definecolor{rulegrey}{HTML}{8A8A8A}
+\definecolor{confidred}{HTML}{8B0000}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=luxblue,
+  citecolor=luxblue,
+  urlcolor=luxblue,
+  pdftitle={SF Private Bank x Lux Industries Integration Brief},
+  pdfauthor={Lux Industries Inc.},
+}
+
+\titleformat{\section}{\Large\bfseries\color{luxblue}}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\large\bfseries\color{luxblue}}{\thesubsection}{0.7em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{luxblue}}{\thesubsubsection}{0.6em}{}
+
+\usepackage{./shared/luxcover}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\lhead{\small\textcolor{luxblue}{Lux Industries Inc.}}
+\chead{\small\textbf{\textcolor{confidred}{CONFIDENTIAL}}}
+\rhead{\small\textcolor{rulegrey}{SFPB Integration Brief}}
+\rfoot{\small\textcolor{rulegrey}{\thepage{} of \pageref{LastPage}}}
+\lfoot{\small\textbf{\textcolor{confidred}{CONFIDENTIAL — Pre-decisional}}}
+
+\renewcommand{\abstractnamefont}{\normalfont\bfseries\color{luxblue}}
+\renewcommand{\abstracttextfont}{\normalfont\itshape\small}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+\title{SF Private Bank \texttimes{} Lux Industries \\ \vspace{0.4em}
+       Integration Brief}
+\author{Lux Industries Inc.}
+\date{2026}
+
+\begin{document}
+\luxcoverpage
+
+\begin{center}
+{\Huge\bfseries\color{luxblue} SF Private Bank \texttimes{} Lux Industries}\\[0.4em]
+{\Large\color{luxaccent} Integration Brief}\\[0.6em]
+{\large SF Private Pay $\cdot$ Multi-Currency Accounts $\cdot$ IBAN Issuance $\cdot$ Card Issuance $\cdot$ Merchant Acquiring}\\[1em]
+{\small Lux Industries Inc. \textbar{} Delaware, United States\\
+\href{mailto:partnerships@lux.industries}{partnerships@lux.industries}}\\[0.6em]
+{\small\textbf{\textcolor{confidred}{CONFIDENTIAL --- Pre-decisional --- Reference OG-SP-2026-SFPB}}}
+\end{center}
+
+\vspace{0.6em}
+
+\begin{abstract}
+\noindent This brief enumerates exactly what Lux Industries Inc.\ needs
+from SF Private Bank (``SFPB'') to leverage the SFPB banking stack ---
+SF Private Pay (PSP), multi-currency accounts and IBAN issuance, card
+issuance, and merchant acquiring --- under the Lux \texttimes{} Local
+Partner Strategic Partnership Agreement (50/50 net partnership revenue
+above documented costs). It is the technical, commercial, and compliance
+checklist for the joint kickoff. It is confidential between Lux
+Industries and SFPB and is not for distribution. It is a working
+document; it is not a contract and does not modify the underlying
+partnership agreement.
+\end{abstract}
+
+\vspace{0.4em}
+\noindent\textit{Reference:} OG-SP-2026-SFPB (partnership-agreement
+reference). \textit{Audience:} SFPB technical + commercial leadership.
+\textit{Purpose:} kickoff agenda + integration prerequisites.
+
+% =====================================================================
+\section{Context}
+
+Lux Industries operates a native, regulator-neutral financial backend:
+\texttt{bankd} ledger, \texttt{forexd} FX engine, \texttt{brokerd} smart
+order router, \texttt{treasuryd} double-entry ledger + 14 leaf adapters,
+\texttt{amld} AML/sanctions, \texttt{@luxfi/bridge} cross-chain MPC,
+\texttt{lux/kms} HSM-backed key custody, \texttt{lux/mpc} threshold
+signing. Customer surfaces sit on top: \texttt{lux.financial} (marketing
++ product), \texttt{app.lux.financial} (operational console), per-tenant
+white-label deploys for downstream partners.
+
+SFPB holds the US chartered-bank + BD + ATS + TA + FinCEN MSB +
+state money-transmitter + CIRO + CSA + FINTRAC license stack and
+operates SF Private Pay (Zeekash agent rails, MyATMen ATM network, card
+issuance, ACH / wire / FedNow, stablecoin on/off-ramp).
+
+The partnership is \textbf{50/50 net partnership revenue above
+documented costs}, per the Lux \texttimes{} Local Partner Strategic
+Partnership Agreement template already shared. This brief enumerates
+exactly what we need from SFPB at the technical, commercial, and
+compliance layers so we can wire the integration and start producing
+partnership revenue.
+
+% =====================================================================
+\section{SF Private Pay (PSP)}
+
+\paragraph{What SFPB gives us.}
+A regulated US-side payment service provider product covering card
+acceptance, alternative payment methods, agent cash rails (Zeekash),
+ATM rails (MyATMen), card issuance, ACH / wire / FedNow, and stablecoin
+on/off-ramp.
+
+\subsection{Technical requirements}
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{API base URLs} --- production + sandbox.
+  \item \textbf{API documentation} --- full OpenAPI / Swagger or
+        equivalent spec covering every endpoint (auth, accounts,
+        customers, payments, payouts, refunds, disputes, reports).
+  \item \textbf{Auth model} --- OAuth client\_credentials, API key +
+        HMAC, mTLS, or signed JWT. Token rotation policy and rate
+        limits.
+  \item \textbf{Webhook spec} --- per event type
+        (\texttt{payment.authorized}, \texttt{payment.captured},
+        \texttt{payment.failed}, \texttt{payout.completed},
+        \texttt{dispute.opened}, \texttt{chargeback.received}, ...)
+        with payload schema, HMAC signature header + algorithm, retry
+        policy, idempotency-key header convention. We will subscribe at
+        \texttt{https://api.lux.financial/webhooks/sfpay/<event\_type>}
+        with HMAC verification before our callback handler accepts.
+  \item \textbf{Idempotency-key convention} --- header name and how
+        SFPB dedupes.
+  \item \textbf{Test credentials} --- test credit card numbers, test
+        bank routing/account numbers, sandbox failure scenarios
+        (insufficient funds, sanctions hit, KYC mismatch, fraud
+        reject, dispute).
+  \item \textbf{Rate limits} --- per-key request/minute, burst, and
+        tier.
+\end{itemize}
+
+\subsection{Capability matrix --- one row per rail we plan to surface}
+
+\begin{tabularx}{\linewidth}{Y l c c c r r}
+\toprule
+\textbf{Rail} & \textbf{Dir.} & \textbf{Snd} & \textbf{Prod} &
+\textbf{T+} & \textbf{Per-tx limit} & \textbf{Fee} \\
+\midrule
+Card acceptance (Visa/MC/AMEX/Discover) & in    & ? & ? & ? & ? & ? \\
+Card-not-present (e-com)                & in    & ? & ? & ? & ? & ? \\
+Card-present (POS)                      & in    & ? & ? & ? & ? & ? \\
+ACH debit                               & in    & ? & ? & ? & ? & ? \\
+ACH credit                              & out   & ? & ? & ? & ? & ? \\
+FedNow                                  & in/out & ? & ? & ? & ? & ? \\
+RTP (TCH)                               & in/out & ? & ? & ? & ? & ? \\
+Wire (Fedwire)                          & in/out & ? & ? & ? & ? & ? \\
+Wire (CHIPS)                            & out   & ? & ? & ? & ? & ? \\
+SWIFT MT103                             & in/out & ? & ? & ? & ? & ? \\
+Interac (Canada)                        & in/out & ? & ? & ? & ? & ? \\
+Zeekash agent cash-in                   & in    & ? & ? & ? & ? & ? \\
+Zeekash agent cash-out                  & out   & ? & ? & ? & ? & ? \\
+MyATMen deposit                         & in    & ? & ? & ? & ? & ? \\
+MyATMen withdrawal                      & out   & ? & ? & ? & ? & ? \\
+Stablecoin (USDC/USDT) on-ramp          & in    & ? & ? & ? & ? & ? \\
+Stablecoin off-ramp                     & out   & ? & ? & ? & ? & ? \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Commercial requirements}
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{Fee schedule} for each rail (per-transaction,
+        percentage, monthly minimum).
+  \item \textbf{Settlement mechanics} --- when funds clear; holdback /
+        reserve requirements; FBO vs direct deposit.
+  \item \textbf{Revenue-share} mechanics confirming compatibility with
+        the 50/50 above documented costs structure in the partnership
+        agreement.
+  \item \textbf{Reporting feeds} --- daily reconciliation (CSV/JSON
+        SFTP or webhook push), per-merchant breakdown, fee detail,
+        dispute aging.
+  \item \textbf{Chargeback / dispute liability} --- who carries the
+        reserve, what's the partner-side process.
+\end{itemize}
+
+\subsection{Compliance requirements}
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{Shared responsibility matrix} explicitly stating who
+        performs: KYC, KYB, OFAC sanctions screening, PEP screening,
+        AML transaction monitoring, BSA SAR filing, CTR filing, FBAR,
+        FATCA, Reg E disputes, Reg Z disclosures, PCI-DSS scope
+        ownership.
+  \item \textbf{PCI-DSS scope} --- does SFPay tokenise on the iframe /
+        hosted fields so we stay out of scope, or do we need full
+        SAQ D?
+  \item \textbf{Card-network rules attestation} --- Visa CISP,
+        Mastercard SDP, AMEX DSOP compliance evidence for SFPay's
+        acquiring stack.
+\end{itemize}
+
+\paragraph{Lux integration target.}
+\texttt{treasury/pkg/provider/sfpay/} --- new adapter implementing the
+standard \texttt{Provider} interface (\texttt{CreateAccount},
+\texttt{CreatePayment}, \texttt{GetPayment}, \texttt{ListPayments},
+\texttt{GetBalance}, \texttt{GetFXQuote / CreateFXConversion} if
+multi-currency, \texttt{CreateCounterparty}, \texttt{Capabilities}).
+Env-gated on \texttt{SFPAY\_API\_KEY}. Webhook ingest at \texttt{forexd}
+or \texttt{bankd} with HMAC verify.
+
+% =====================================================================
+\section{Multi-currency accounts + IBAN issuance}
+
+\paragraph{What SFPB gives us.}
+Account issuance across the SFPB regulated perimeter --- USD accounts
+with ABA routing + account number (US); CAD accounts with transit +
+account (Canada); GBP, EUR, and other currencies via partner EMI
+relationships or correspondent banks; named or virtual IBANs where
+the partner offers SEPA / Faster Payments access.
+
+\subsection{Technical requirements}
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{Account types} SFPB can issue: checking, savings,
+        custodial (FBO), virtual sub-account, escrow.
+  \item \textbf{Account-issuance API} --- create per-customer account,
+        list, freeze, close. Per-customer KYC payload requirements.
+  \item \textbf{Multi-currency support} --- which currencies natively,
+        which via partner EMI, settlement mechanics for cross-currency
+        transfers.
+  \item \textbf{IBAN issuance} --- does SFPB issue named GBP / EUR
+        IBANs directly or via a UK / EU EMI partner? If partner: who,
+        what passport, shared-responsibility mapping. Or: do we
+        provide our own EU EMI partner and use SFPB only for US/CA?
+  \item \textbf{Sweep / cash-management} --- overnight sweep, balance
+        interest if any, target-balance rules.
+  \item \textbf{Statement + reporting} API --- daily balance feed,
+        transaction detail, year-end 1099 / equivalent.
+\end{itemize}
+
+\subsection{Commercial requirements}
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{Per-account monthly fee} schedule.
+  \item \textbf{Per-transaction fees} for each outbound rail at the
+        account level (separate from PSP merchant acquiring).
+  \item \textbf{Interest-bearing accounts} --- interest split if any.
+  \item \textbf{Minimum balance / reserve} required to maintain
+        account.
+\end{itemize}
+
+\subsection{Compliance requirements}
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{CDD requirements} per customer type (US natural
+        person, US legal entity, US trust, foreign natural person,
+        foreign legal entity). Document checklist + acceptable ID
+        types.
+  \item \textbf{OFAC screening cadence} --- onboarding + per-transaction
+        + ongoing.
+  \item \textbf{CIP/BSA reliance} --- can SFPB rely on Simplici.io's
+        KYC/CIP results under a Reliance Agreement (WRA), or does SFPB
+        require independent CDD? Reliance Agreement template?
+  \item \textbf{Reg E} dispute handling responsibility.
+  \item \textbf{State money-transmitter} licensing footprint --- does
+        SFPB cover all 50 states or do we route around unlicensed
+        states?
+\end{itemize}
+
+\paragraph{Lux integration target.}
+\texttt{treasury/pkg/provider/sfpb-accounts/} --- implements
+\texttt{CreateAccount}, \texttt{GetAccount}, \texttt{ListAccounts},
+\texttt{GetBalance}, \texttt{CreateCounterparty} end-to-end; routes
+outbound payment rails through SFPay (above) or directly where SFPB's
+account API exposes them.
+
+% =====================================================================
+\section{Card issuance}
+
+\paragraph{What SFPB gives us.}
+BIN sponsorship via SFPB's Visa and/or Mastercard principal membership;
+issuance of debit, prepaid, and (where applicable) credit cards under
+our brand or partner-tenant brand, physical and virtual.
+
+\subsection{Technical requirements}
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{Card-issuing platform} --- is SFPB on Marqeta, Lithic,
+        Galileo, FIS, i2c, in-house? Whatever it is, we need API
+        access (read-only at minimum; ideally full create / freeze /
+        replace / cancel).
+  \item \textbf{Card product configurations} --- debit, prepaid
+        (open-loop, closed-loop), credit, virtual-only, single-use,
+        expense-controlled.
+  \item \textbf{Funding model} --- direct from cardholder account,
+        FBO pooled, ledger-backed-on-our-side with daily settlement
+        to SFPB.
+  \item \textbf{Auth stream} --- real-time authorization webhook
+        (sub-200ms decision) with our risk engine (\texttt{amld} +
+        custom rules) participating in the auth decision. Spec for
+        the auth-request payload + decision response.
+  \item \textbf{3DS} --- 3DS2 challenge integration, ACS provider,
+        fall-back path.
+  \item \textbf{Card-network tokenisation} --- Visa Token Service /
+        Mastercard MDES support for Apple Pay / Google Pay /
+        Samsung Pay.
+  \item \textbf{Physical card production} --- vendor (Perfect Plastic /
+        CPI / G+D M\"uhlbauer / Tag Systems / Idemia), turnaround,
+        custom artwork approval flow, EMV chip personalisation,
+        contactless.
+  \item \textbf{PIN management} --- PIN issuance, change, unblock;
+        PIN-Verify service.
+  \item \textbf{Dispute / chargeback} --- flow into the network
+        dispute API; SFPB-side process for representment +
+        arbitration.
+\end{itemize}
+
+\subsection{Commercial requirements}
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{Setup fees} --- per BIN, per card product, artwork
+        approval.
+  \item \textbf{Per-card fees} --- issuance, monthly active,
+        transaction (network + processing), 3DS, tokenisation,
+        physical-card production.
+  \item \textbf{Interchange revenue share} --- the headline economic.
+        Visa/MC posted interchange, less network assessments, less
+        processing fees, less SFPB take; net interchange flows into
+        the 50/50 partnership pool.
+  \item \textbf{Cardholder funding} --- is there a customer-deposit
+        reserve requirement?
+\end{itemize}
+
+\subsection{Compliance requirements}
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{KYC for cardholders} --- CIP requirements; SFPB-required
+        or our WRA-reliance.
+  \item \textbf{CARD Act / Reg Z} disclosure ownership for credit /
+        prepaid.
+  \item \textbf{Reg E} dispute ownership.
+  \item \textbf{OFAC} screening on cardholder onboarding + ongoing.
+  \item \textbf{Network rules} --- Visa Operating Regulations,
+        Mastercard Rules attestation; PCI-DSS compliance scope for
+        cardholder data on our side.
+\end{itemize}
+
+\paragraph{Lux integration target.}
+\texttt{treasury/pkg/provider/sfpb-cards/} implements the card-issuance
+side of the \texttt{Provider} interface (\texttt{CreateCard},
+\texttt{GetCard}, \texttt{FreezeCard}, \texttt{ReplaceCard},
+\texttt{ListTransactionsForCard}). Auth-stream webhook handled by
+\texttt{bankd} with \texttt{amld} risk-gate participation. Card-decline
+reasons emitted to Lux Network as content-addressed audit events.
+
+% =====================================================================
+\section{Merchant acquiring (PSP card acceptance for our partners)}
+
+\paragraph{What SFPB gives us.}
+Acquiring services for our downstream merchant partners --- onboarding,
+MID provisioning, settlement, dispute management --- across the
+jurisdictions where SFPB or its acquiring partner holds the requisite
+acquirer licences.
+
+\subsection{Requirements}
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{Acquirer jurisdictions} --- which Visa / Mastercard
+        regions, plus domestic schemes (AMEX, Discover, Diners, JCB,
+        UnionPay, Interac).
+  \item \textbf{Onboarding API} --- KYB submission, beneficial-ownership
+        attestation, MCC assignment, monthly volume cap.
+  \item \textbf{Underwriting timeline} --- SLA from KYB submitted to
+        MID issued.
+  \item \textbf{MID provisioning} --- per merchant, per MCC; descriptor
+        rules, soft-descriptor support, dynamic-descriptor by
+        transaction.
+  \item \textbf{Settlement schedule} --- T+N per merchant tier, daily
+        ACH or wire, holdback / reserve mechanics.
+  \item \textbf{Dispute API} --- chargeback receive, representment
+        submit, evidence upload, arbitration escalation.
+  \item \textbf{Reporting} --- per-merchant daily + monthly fee
+        detail, gross + net + interchange + assessments + processing.
+\end{itemize}
+
+(Compliance posture inherits from \S2 SFPay.)
+
+\paragraph{Lux integration target.}
+The same \texttt{treasury/pkg/provider/sfpay/} adapter handles the
+merchant-acquiring surface --- same auth, same webhooks, separate
+endpoint family.
+
+% =====================================================================
+\section{Cross-cutting operational + commercial requirements}
+
+\subsection{Operational}
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{Sandbox vs production parity} --- every endpoint above
+        must work in sandbox with realistic data, before production
+        credentials issue.
+  \item \textbf{API status page} + status webhook.
+  \item \textbf{Maintenance windows} --- schedule, advance notice,
+        runbook for failover or graceful-degradation.
+  \item \textbf{On-call escalation path} --- named technical liaison,
+        on-call rotation contact, SLA on critical incidents
+        (P0 / P1 / P2 / P3 with response + resolution targets).
+  \item \textbf{Production cutover plan} --- phased rollout
+        (shadow $\to$ 1\% $\to$ 10\% $\to$ 100\%), per-product
+        enablement, named go/no-go gates.
+\end{itemize}
+
+\subsection{Commercial}
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{Documented Costs definition} alignment with the
+        partnership agreement (which SFPB-incurred costs count as
+        Documented; e.g.\ network interchange, processing, sponsor
+        fees yes; SFPB overhead / marketing / cost of capital no).
+  \item \textbf{Net Partnership Revenue reconciliation cadence} ---
+        monthly statements within 15 business days of month-end,
+        joint reconciliation meeting within 5 business days of
+        statement delivery, net wire within 30 days.
+  \item \textbf{Audit rights} --- biannual, on 30 days' notice, at
+        audited party's expense if >5\% underpayment.
+  \item \textbf{Customer markup retention} --- SFPB confirms 100\%
+        retention of any customer-facing markups by either party
+        stays with the marking-up party (the standard from the
+        partnership agreement).
+\end{itemize}
+
+\subsection{Compliance shared-responsibility matrix}
+Annex A to the partnership agreement should formalise the SFPB-side vs
+Lux-side regulated-function allocation across:
+
+\begin{itemize}[leftmargin=1.6em]
+  \item BSA / AML programme ownership
+  \item OFAC sanctions screening
+  \item CIP / CDD / EDD
+  \item Suspicious Activity Reports (FinCEN)
+  \item Currency Transaction Reports (FinCEN)
+  \item FBAR / FATCA / CRS / GoAML
+  \item Reg E (electronic fund transfers) dispute resolution
+  \item Reg Z (truth in lending) disclosures
+  \item Reg D (regulation D, account-class restrictions if any)
+  \item Network operating-rules compliance (Visa CISP, MC SDP)
+  \item PCI-DSS scope ownership per integration surface
+  \item Card Act disclosures (where applicable)
+  \item State money-transmitter licensing footprint
+  \item CIRO / CSA Canadian rules
+  \item FCA / FINTRAC / EBA cross-border rules where SFPB extends
+\end{itemize}
+
+% =====================================================================
+\section{What we will give SFPB in return}
+
+For reference, the symmetric obligations from the partnership agreement
+that satisfy SFPB's side of the deal:
+
+\begin{itemize}[leftmargin=1.6em]
+  \item \textbf{Simplici.io} white-labelled onboarding, KYC, AML,
+        sanctions, PEP with the per-check pass-through pricing in
+        the agreement; SFPB can rely on Simplici under a WRA.
+  \item \textbf{Lux Network} content-addressed audit substrate
+        covering every state transition relevant to SFPB-supervised
+        activity, with cryptographic commitments retainable for the
+        durations required by CBS, FinCEN, OFAC, FATCA.
+  \item \textbf{Identity} --- every customer onboarded once, used
+        across every product surface (account, card, FX, crypto) with
+        consistent reference IDs.
+  \item \textbf{Distribution} --- our customer base served through
+        SFPB-issued accounts, SFPB-issued cards, SFPB-acquired
+        merchants. Concrete volume forecast in the partnership-agreement
+        schedule.
+  \item \textbf{Net Partnership Revenue} monthly statements and 50/50
+        settlement on the agreed cadence.
+  \item \textbf{Operational integration} of our risk and AML rules
+        into the SFPB auth stream so SFPB sees consistent risk-gate
+        decisions.
+\end{itemize}
+
+% =====================================================================
+\section{Decision checklist for the joint kickoff call}
+
+To convert this into a green-lit project we propose the following items
+as agenda for the kickoff:
+
+\begin{enumerate}[leftmargin=1.6em]
+  \item SFPB confirms API documentation will be shared under NDA within
+        5 business days.
+  \item SFPB confirms a sandbox tenant will be provisioned for Lux
+        engineering within 10 business days.
+  \item SFPB confirms the named technical liaison + on-call escalation
+        path.
+  \item SFPB confirms the shared-responsibility matrix (Annex A above)
+        is acceptable in principle and identifies any function it would
+        prefer to retain or delegate.
+  \item SFPB confirms its UK/EU IBAN partner (if any) and the
+        operational model for cross-currency settlement.
+  \item SFPB confirms the card BIN sponsor / issuing platform and any
+        prior commercial dependencies (e.g.\ existing Marqeta or Lithic
+        relationship) that we should integrate to vs around.
+  \item Joint sign-off on the partnership-agreement Annex A
+        (shared-responsibility) and Annex B (Documented Costs
+        definition) within 15 business days.
+\end{enumerate}
+
+% =====================================================================
+\section{Phased deliverable timeline}
+
+\begin{tabularx}{\linewidth}{c Y l l}
+\toprule
+\textbf{Phase} & \textbf{Deliverable} & \textbf{Owner} & \textbf{ETA} \\
+\midrule
+0 & Mutual confidentiality executed                                 & Both & 5 BD \\
+0 & Sandbox creds for SFPay + accounts + cards                       & SFPB & 10 BD \\
+0 & Annex A + Annex B sign-off                                       & Both & 15 BD \\
+1 & \texttt{treasury/pkg/provider/sfpay/} PR open                    & Lux  & 4 wks \\
+1 & \texttt{treasury/pkg/provider/sfpb-accounts/} PR open            & Lux  & 4 wks \\
+1 & \texttt{treasury/pkg/provider/sfpb-cards/} PR open               & Lux  & 6 wks \\
+1 & Shadow-mode pilot (read-only, no funds)                          & Joint & 8 wks \\
+2 & 1\% live traffic gate                                            & Joint & 12 wks \\
+2 & 10\% live traffic gate                                           & Joint & 16 wks \\
+3 & 100\% live; first Net Partnership Revenue settlement             & Joint & 24 wks \\
+3 & Audit rights exercised once for baseline                         & Joint & 28 wks \\
+\bottomrule
+\end{tabularx}
+
+% =====================================================================
+\vspace{2em}
+
+\noindent\rule{\linewidth}{0.4pt}
+
+\vspace{0.4em}
+
+{\small\itshape
+Document prepared by Lux Industries Inc.\ for SF Private Bank.
+Confidential and pre-decisional. Reference: OG-SP-2026-SFPB
+(partnership-agreement reference).}
+
+\end{document}
