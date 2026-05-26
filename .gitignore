@@ -14,14 +14,11 @@
 .DS_Store
 Thumbs.db
 
-# Brand-separation enforcement: per CLAUDE.md, files mentioning or
-# scoped to Liquidity / Satschel MUST NOT live under ~/work/lux/*.
-# These patterns block accidental git-add of misfiled artifacts.
-LIQUIDITY_*
-liquidity_*
-SATSCHEL_*
-satschel_*
-*Liquidity*.pdf
-*Liquidity*.docx
-*Satschel*.pdf
-*Satschel*.docx
+# IMPORTANT — file-naming clarification:
+# 1. Liquidity OWN content (their source, configs, brand assets, IP they
+#    own) does NOT belong here — lives under ~/work/liquidity/* only.
+# 2. Lux WORK PRODUCT *ABOUT* Liquidity (enforcement memos, license
+#    audits, board materials, IP-theft documentation) DOES belong here.
+#    Those files commonly have LIQUIDITY_* or *Liquidity* in the name.
+# This .gitignore therefore does NOT block LIQUIDITY_* / SATSCHEL_*
+# filenames as a class — humans must judge per-file at git-add time.
