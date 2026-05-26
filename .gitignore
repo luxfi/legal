@@ -24,3 +24,11 @@ Thumbs.db
 # filenames as a class — humans must judge per-file at git-add time.
 liquidity/exhibits/LiquiditySwap.mp4
 liquidity/exhibits/Alpaca - liquidity.io*.zip
+
+# liquidity/exhibits/alpaca-liquidity-bd/ — Counterparty's Alpaca clearing-BD
+# diligence materials including KYC ID jpegs (Eric Choi front/back), signed
+# beneficial-ownership certifications, and other PII-sensitive evidence.
+# Preserved on disk for counsel reference; deliberately NOT committed to
+# git history due to PII content + push-size concerns. Counsel may produce
+# specific files on subpoena/discovery from the on-disk preservation.
+liquidity/exhibits/alpaca-liquidity-bd/
