@@ -22,3 +22,5 @@ Thumbs.db
 #    Those files commonly have LIQUIDITY_* or *Liquidity* in the name.
 # This .gitignore therefore does NOT block LIQUIDITY_* / SATSCHEL_*
 # filenames as a class — humans must judge per-file at git-add time.
+liquidity/exhibits/LiquiditySwap.mp4
+liquidity/exhibits/Alpaca - liquidity.io*.zip
