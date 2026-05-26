@@ -15,7 +15,6 @@ Partners interoperate via the Lux backend (`bankd`, `treasuryd`,
 | Reference | Partner | Region | Role |
 |---|---|---|---|
 | `OG-SP-2026-SFPB` | SF Private Bank | United States + Canada | US chartered private bank + BD + ATS + TA + FinCEN MSB + state money-transmitter + CIRO + CSA + FINTRAC stack; operat… |
-| `OG-SP-2026-SOGO` | SogoTrade, Inc. | United States | US registered broker-dealer; introduction + execution + distribution of US securities to a retail customer base. |
 | `OG-SP-2026-AVA` | AvaTrade Ltd. | Ireland / EU / Australia / South Africa / UK / Japan / BVI / UAE. | Multi-jurisdiction regulated retail brokerage group (Ireland Central Bank, ASIC, FSCA, FCA, JFSA, BVI FSC, ADGM FSRA). |
 | `OG-SP-2026-ATM` | Atmen Ltd. | United Kingdom | Culture-led consumer banking and payments application (“Atmen --- Culture meets Currency”) serving an international d… |
 | `OG-SP-2026-SSB` | Salaam Somali Bank | Somalia + Horn of Africa diaspora | Somalia’s first privately owned commercial bank (2009); ~45% market share; ISO 9001:2015 certified; SWIFT member; pri… |
@@ -30,15 +29,6 @@ Partners interoperate via the Lux backend (`bankd`, `treasuryd`,
 - **Coordination with other partners**: Provides the regulated US/CA bank, BD, PSP, and card-issuance rails that every other named Lux ecosystem partner can plug into via the Lux backend (treasury / forex / bankd / amld).
 - **Status**: Brief delivered (sfpb_integration_brief.pdf); awaiting kickoff per §7 of the brief.
 - **Agreement file**: `partnerships/sfpb/Lux_*_Strategic_Partnership_Agreement.{docx,pdf}`
-
-### SogoTrade, Inc.
-
-- **Reference**: `OG-SP-2026-SOGO`
-- **Region**: United States
-- **Role**: US registered broker-dealer; introduction + execution + distribution of US securities to a retail customer base.
-- **Coordination with other partners**: Uses SFPB for ACH/wire settlement, card-funded buy-side deposits, and (optionally) the SF Private Bank ATS as an additional execution venue. Customer KYC via Simplici.io with WRA reliance from SFPB.
-- **Status**: Agreement delivered.
-- **Agreement file**: `partnerships/sogotrade/Lux_*_Strategic_Partnership_Agreement.{docx,pdf}`
 
 ### AvaTrade Ltd.
 
