@@ -1,0 +1,1648 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+
+\definecolor{lux-red}{HTML}{8B1A1A}
+\definecolor{lux-grey}{HTML}{4A4A4A}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=lux-red,
+  citecolor=lux-grey,
+  urlcolor=lux-red,
+  pdftitle={Lux Industries Inc.\ --- IP Enforcement Memorandum},
+  pdfauthor={Woo Bin --- Chief Technology Officer, Lux Industries Inc.},
+  pdfsubject={Confidential board memorandum},
+}
+
+\titleformat{\section}{\normalfont\Large\bfseries\color{lux-grey}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries\color{lux-grey}}{\thesubsection}{0.6em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{lux-grey}\textsc{Confidential --- Board Materials --- Attorney-Client Privileged}}
+\fancyhead[R]{\small\color{lux-grey}Lux Industries Inc.}
+\fancyfoot[C]{\small\color{lux-grey}\thepage}
+\renewcommand{\headrulewidth}{0.2pt}
+
+\begin{document}
+
+% ─────────────────────────────────────────────────────────────────
+% Cover page
+% ─────────────────────────────────────────────────────────────────
+\pagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[black] (current page.south west) rectangle (current page.north east);
+
+  \node[anchor=north west] at ([xshift=1.4cm,yshift=-1.4cm]current page.north west) {%
+    \begin{tikzpicture}[scale=0.5]
+      \fill[white] (-0.7,0.55) -- (0.7,0.55) -- (0,-0.55) -- cycle;
+    \end{tikzpicture}%
+  };
+
+  \node[anchor=center,text=white,font=\fontsize{30}{38}\selectfont\bfseries,text width=14cm,align=center]
+    at ([yshift=3.2cm]current page.center) {LUX INDUSTRIES};
+
+  \node[anchor=center,text=white!70,font=\fontsize{14}{18}\selectfont,text width=14cm,align=center]
+    at ([yshift=1.6cm]current page.center)
+    {IP Enforcement Memorandum};
+
+  \draw[white!30,line width=0.5pt]
+    ([yshift=0.5cm,xshift=-5cm]current page.center) --
+    ([yshift=0.5cm,xshift=5cm]current page.center);
+
+  \node[anchor=center,text=white!40,font=\fontsize{9}{11}\selectfont]
+    at ([yshift=-0.8cm]current page.center)
+    {Prepared for: Cyrus Pahlavi, President \& CEO};
+
+  \node[anchor=center,text=white!40,font=\fontsize{9}{11}\selectfont]
+    at ([yshift=-1.4cm]current page.center)
+    {Hunter Dupont, Managing Partner --- Strategic Transactions};
+
+  \node[anchor=center,text=white!40,font=\fontsize{9}{11}\selectfont]
+    at ([yshift=-2.0cm]current page.center)
+    {Alan Donohue, General Counsel};
+
+  \node[anchor=center,text=white!40,font=\fontsize{9}{11}\selectfont]
+    at ([yshift=-2.8cm]current page.center)
+    {Prepared by: Woo Bin --- CTO, Lux Industries Inc.};
+
+  \node[anchor=center,text=white!30,font=\fontsize{9}{11}\selectfont]
+    at ([yshift=-3.4cm]current page.center)
+    {2026-05-25};
+
+  \node[anchor=south west,text=white!20,font=\fontsize{7}{9}\selectfont]
+    at ([xshift=1.4cm,yshift=0.8cm]current page.south west)
+    {Lux Industries Inc.};
+
+  \node[anchor=south east,text=white!20,font=\fontsize{7}{9}\selectfont]
+    at ([xshift=-1.4cm,yshift=0.8cm]current page.south east)
+    {CONFIDENTIAL --- ATTORNEY-CLIENT PRIVILEGED};
+\end{tikzpicture}
+\clearpage
+\pagestyle{fancy}
+\setcounter{page}{1}
+
+% ─────────────────────────────────────────────────────────────────
+\begin{flushleft}
+\textbf{\textsc{Memorandum}}\\[0.5em]
+\begin{tabularx}{\textwidth}{lX}
+\textbf{TO:}        & Cyrus Pahlavi, President \& Chief Executive Officer, Lux Industries Inc. \\
+                    & Hunter Dupont, Managing Partner --- Strategic Transactions (deal lead) \\
+                    & Alan Donohue, General Counsel (legal lead) \\
+\textbf{CC:}        & Board of Directors, Lux Industries Inc. \\
+\textbf{FROM:}      & Woo Bin --- Chief Technology Officer, Lux Industries Inc.; concurrently Vice President of Engineering, the Counterparty \\
+\textbf{DATE:}      & 25 May 2026 \\
+\textbf{RE:}        & Misappropriation of Lux foundational technology by the Counterparty (Satschel, Inc.\ d/b/a Liquidity.io, and operating affiliate Liquidity.io LLC); legal options, damages analysis, and proposed cross-license and settlement framework \\
+\textbf{PRIVILEGE:} & Confidential. Attorney-client privileged. Attorney work product. Prepared in anticipation of litigation and as a board strategy document. \\
+\end{tabularx}
+\end{flushleft}
+
+\vspace{0.3em}
+\begin{small}
+\textit{Author's disclosure of interest:} I serve concurrently as
+Chief Technology Officer of Lux Industries Inc.\ and Vice President
+of Engineering at the Counterparty entity referenced herein. This
+memorandum is written from the Lux chair, in service of the Lux
+board's decision-making. My Counterparty role gives direct
+operational visibility into the matters described; I have set them
+out as observed, with the understanding that any Counterparty-side
+response will be developed by its own counsel and that Lux's outside
+litigation counsel will need to develop independent record support
+for any allegations herein before filing.
+\end{small}
+
+\vspace{0.5em}\hrule height 0.6pt\vspace{1em}
+
+% ─────────────────────────────────────────────────────────────────
+\section*{I.\ Executive Summary}
+
+\textbf{The Counterparty has commercially deployed material portions
+of Lux Industries Inc.'s patent-protected and source-available
+proprietary technology since at least 2014, in production, on three
+live blockchain networks, and in support of a registered ATS/BD/TA
+business that is currently raising approximately \$75 million at a
+\$1.1 billion valuation, with \textbf{Forum Markets} (a publicly-traded
+company, formerly Ethzilla; ticker \textbf{[TICKER --- to be confirmed
+against SEC EDGAR]}) continuing as lead investor from the prior round
+and verbal commitments for at least approximately half the round
+secured to date --- in each case without executing the commercial
+license that the governing Lux Ecosystem License v1.2
+(``LEL'') and the Lux Research License with Patent Reservation v1.0
+(``LRL--PR'') require.}
+
+\textbf{Lux's direct investment in the misappropriated technology
+base exceeds \$20 million in development cost recorded since 2014,
+plus a multi-year contribution from senior engineering personnel
+including the Lux Chief Cryptographer and the named author of this
+memorandum.}
+
+\textbf{The most striking evidentiary fact in this memorandum is the
+90-day commit-ratio analysis at \S VI:} the Lux Founder and Chief
+Cryptographer contributed \textbf{5,991 commits} and approximately
+\textbf{93 million lines of code} (additions + deletions) across six
+venture trees --- the Counterparty's primary codebase plus five
+related ventures (VCC, MLC, EquityTable, OnyxPlus, and the
+legacy/archive codebase including the simplici-* repositories) ---
+during the most recent 90-day window, and \textbf{zero commits to
+Lux's upstream repositories} in the same window. The Counterparty
+reached its \$1.1B current-round valuation during that same 90 days.
+The implied value-creation rate of the Lux Founder's diverted
+bandwidth is approximately \textbf{\$12.2M per day}.
+
+\textbf{Discovery posture.} This matter was identified and elevated to
+the Lux Industries Inc.\ board by Mr.\ Woo Bin (Lux CTO; concurrent
+VPE at the Counterparty), whose dual-role visibility --- \texttt{luxfi/*}
+GitHub-org admin on the Lux side combined with operational seat on the
+Counterparty's engineering organization --- positioned him to observe
+the unauthorized integration of Lux modules into the Counterparty's
+commercial stack and the absence of a corresponding executed license.
+Mr.\ Bin remains in his VPE role; his team's continued involvement is
+required for the Counterparty's long-term operational success, and the
+desired outcome of this matter is an \textbf{equitable settlement
+preserving Counterparty operational continuity while recognising Lux's
+contribution}, rather than scorched-earth litigation.
+
+\textbf{This memorandum sets out the legal record, identifies twelve
+causes of action available to Lux, quantifies damages at small /
+medium / big scenarios (\$80M to \$590M for IP claims; \$180M to
+\$890M with opportunity-cost component added), projects forward
+enterprise value at user-scale milestones up to 100M users (Lux's
+10\% equity stake value ranges \$5M -- \$40B), analyzes the
+``wait vs.\ settle'' time-value question, presents a settlement
+triangulation matrix the deal lead (Mr.\ Dupont) can use to
+negotiate, and locks the mandatory terms the President \& CEO (Mr.\
+Pahlavi) requires in any executed agreement.}
+
+\textbf{This is not a single-proposal document.} It presents data,
+damage ranges, partnership-upside ranges, and negotiating floors.
+The deal team triangulates to a specific outcome. Mr.\ Pahlavi
+retains final approval authority on any executed agreement.
+
+% ─────────────────────────────────────────────────────────────────
+\section*{II.\ Parties and Dramatis Personae}
+
+\subsection*{Lux Industries Inc.\ --- Decision Chain}
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.2em]
+\item \textbf{Cyrus Pahlavi} --- President \& Chief Executive Officer.
+Final approval authority on any settlement, license, or litigation
+decision.
+\item \textbf{Hunter Dupont} --- Largest investor in Lux Industries
+Inc.; Managing Partner, Strategic Transactions. Leads deal discussions
+and commercial negotiations with the Counterparty.
+\item \textbf{Alan Donohue} --- General Counsel. Leads legal strategy
+and definitive-document drafting; provides legal support to Mr.\
+Dupont throughout the negotiation.
+\item \textbf{Woo Bin} --- Chief Technology Officer of Lux Industries
+Inc.; \texttt{luxfi/*} GitHub-org admin. Author of this memorandum.
+Holds concurrent role as Vice President of Engineering at the
+Counterparty (\textbf{role currently active}; his team is required
+for the Counterparty's long-term operational success). It was through
+this concurrent visibility that Mr.\ Bin identified the unauthorized
+integration of Lux modules into the Counterparty's commercial stack
+and elevated the matter to the Lux Industries Inc.\ board, occasioning
+this memorandum.
+\item \textbf{Zach Kelling} --- Founder, Architect, and Chief
+Cryptographer of Lux Industries Inc.; \texttt{luxfi/*} GitHub-org
+admin; minority shareholder. \textbf{Currently serves as Chief
+Technology Officer of the Counterparty}, with operational authority
+over the platform rebuild and ongoing technical posture; the
+Counterparty's commercial decisions and investor-facing
+representations are owned by Mr.\ Choi (CEO) and Mr.\ Tromblye (CSO).
+Mr.\ Kelling's stated objective in supporting this matter is an
+equitable settlement preserving Counterparty operational continuity.
+Not currently a director on either side. \textbf{See \S IV.E for
+particularized treatment and \S XII for protective treatment.}
+\end{itemize}
+
+\subsection*{Counterparty --- Officer Slate}
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.2em]
+\item \textbf{Eric Choi} --- Chief Executive Officer of the
+Counterparty. Top operational authority; ultimate responsibility for
+the Counterparty's representations to investors and regulators
+regarding IP ownership and licensing.
+\item \textbf{Austin Tromblye} --- Chief Strategy Officer; previously
+Acting Chief Executive Officer. Blockchain / AI engineer. Built a
+\textbf{prior} (not current) ATS infrastructure at a prior employer
+(Franklin Templeton) and \textbf{served as an eyewitness in the
+Franklin Templeton litigation} arising from that engagement.
+\textbf{Counsel should review the Franklin Templeton litigation
+record} for (i) pattern-of-conduct evidence relevant to the present
+matter, (ii) any limits on or adverse characterizations of his prior
+testimony that could be impeachable, and (iii) the technical scope and
+quality of the ATS he built there.
+
+Material context: prior to Mr.\ Kelling's arrival as active Chief
+Technology Officer at the Counterparty, the Counterparty's ATS as
+built under Mr.\ Tromblye's technical direction \textbf{lacked even
+basic time-price priority order matching}, the foundational principle
+of any functioning alternative trading system. The pre-Kelling
+technical state is addressed in \S IV(F).
+\item \textbf{Coleman Church} --- Chief Executive Officer of the
+Counterparty's broker-dealer affiliate. FINRA-regulated responsibility
+for the BD's technology and operational integrity.
+\item \textbf{Jayant Sonsurkar} --- Chief Security Officer of the
+Counterparty. Long-standing owner / admin on the Counterparty's GitHub
+organizations: historically \texttt{satschel/*}, and currently
+\texttt{liquidityio/*} --- the latter being the org under which the
+rebuild integrating unlicensed Lux modules is being performed. The
+CSO role at any regulated digital-asset venue carries the duty to
+oversee software-supply-chain integrity, including open-source-license
+review and third-party-IP compliance. As admin on the Counterparty's
+own repositories, Mr.\ Sonsurkar had on-platform visibility into the
+imported Lux LICENSE files --- LEL, LRL--PR, BSD-3, and others ---
+as they entered the Counterparty's build tree. (For clarity:
+\texttt{luxfi/*} GitHub-org admin was held by Mr.\ Bin and Mr.\
+Kelling on the Lux side; Mr.\ Sonsurkar did not have, and was not
+required to have, admin access on Lux's own repositories. His
+duty of OSS-license review attaches to imports into the
+Counterparty's tree, where his admin access was present.)
+\end{itemize}
+
+\subsection*{Counterparty Entity Structure}
+
+For purposes of this memorandum, ``the Counterparty'' refers
+collectively to the operating entities under the current capital
+raise (a Delaware corporation parent and its US LLC operating
+affiliate, transacting as Liquidity.io) unless context requires
+otherwise. The corporate structure should be confirmed during
+outside-counsel diligence.
+
+\textbf{Lead investor (current round).} Forum Markets, a publicly-
+traded company (formerly Ethzilla; ticker \textbf{[TICKER --- to be
+confirmed against SEC EDGAR]}), continues in the lead-investor role
+from the prior round and has signalled continued leadership of the
+current \$75M raise at the \$1.1B valuation. Forum Markets' public-
+issuer status means any decision to anchor a material investment in
+the Counterparty is potentially material to Forum Markets' own
+shareholders, with attendant Form 8-K considerations.
+
+% ─────────────────────────────────────────────────────────────────
+\section*{III.\ Jurisdiction, Venue, and Applicable Law}
+
+\textbf{Federal causes of action} sound in: Defend Trade Secrets Act
+(DTSA), 18 U.S.C.\ \S\S 1836--1839; Copyright Act, 17 U.S.C.\ \S\S
+101 \emph{et seq.}; Patent Act, 35 U.S.C.\ \S\S 271, 281, 284, 285;
+Lanham Act, 15 U.S.C.\ \S 1125(a); Securities Exchange Act of 1934,
+15 U.S.C.\ \S 78j(b) (Rule 10b-5, 17 C.F.R.\ \S 240.10b-5).
+\textbf{State and common-law claims} sound in Delaware (breach of
+fiduciary duty, \emph{Aronson v.\ Lewis}, 473 A.2d 805 (Del.\ 1984);
+aiding and abetting, \emph{Malpiede v.\ Townson}, 780 A.2d 1075
+(Del.\ 2001)), and California (the likely Counterparty principal
+place of business): common-law fraud, unjust enrichment, conversion,
+tortious interference with prospective economic advantage, and civil
+conspiracy.
+
+\textbf{Forum recommendation:} Federal District Court for the
+Northern District of California for the principal action, with
+related Delaware Chancery proceeding for the corporate-governance
+counts. Personal jurisdiction over the individual Counterparty
+officers is established by their commercial activities directed at
+Lux (a Delaware corporation) and their California residence.
+
+\textbf{Litigation hold} --- Lux should issue a formal preservation
+notice to the Counterparty and to each named individual within 30
+days of any term-sheet delivery. Failure of preservation supports an
+adverse-inference instruction at trial.
+
+% ─────────────────────────────────────────────────────────────────
+\section*{IV.\ Statement of Facts}
+
+\textit{The following allegations are stated on information and
+belief, based on the personal knowledge of the undersigned in his
+dual operational role, supplemented by Lux's internal records.}
+
+\subsection*{A. Background of Lux Industries Inc.\ and Its IP (2014--2026)}
+
+\textbf{1.} Lux Industries Inc.\ (with continuous corporate identity
+through Lux Partners Limited predecessor since 2014) has developed,
+since 2014, a blockchain and cryptographic technology stack including
+consensus algorithms, post-quantum cryptographic primitives, threshold
+and MPC protocols, fully-homomorphic-encryption (FHE) precompile
+architecture, virtual-machine substrates, EVM derivatives, decentralized
+exchange matching engines, and cross-chain messaging protocols.
+
+\textbf{2.} Lux's direct development investment in this stack exceeds
+\$20 million in recorded cost from 2014 to date. Fully-loaded
+personnel cost over the same period is a multiple of that figure.
+
+\textbf{3.} Chronological development milestones:
+
+\begin{itemize}[leftmargin=2em,itemsep=0.1em]
+\item \textbf{2014 -- 2017}: Foundational consensus research; early
+Quasar prototypes; cryptographic primitives library;
+\texttt{secp256k1}, \texttt{Ed25519}, \texttt{BLS12-381} reference
+implementations.
+\item \textbf{2018 -- 2020}: Active development of the planet-scale
+DEX matching engine with 1ms finality. Initial EVM fork (LGPL).
+Threshold-MPC research.
+\item \textbf{2020 -- 2023}: Quasar consensus stabilization; Pulsar
+and Magnetar Apache-2.0 threshold-PQ primitives; FHE prototypes.
+\item \textbf{2024}: Ringtail lattice-signature scheme; FIPS 203 /
+204 / 205 verifier precompiles (ML-KEM, ML-DSA, SLH-DSA); P3Q
+protocol; LEL v1.2 and LRL--PR v1.0 formalized; Warp messaging
+protocol stabilization; FHE-based dark-pool matching.
+\item \textbf{2025}: LX Suite DEX precompile family (Pool / Oracle /
+Router / Hooks at LP-9010 onward) released following Uniswap v4's
+hooks model; Corona Ring-LWE threshold scheme (successor to Ringtail);
+LP-4200 precompile address standardization; multi-arch GPU acceleration
+under the closed \texttt{\textasciitilde/work/luxcpp/*} tree.
+\item \textbf{2026}: Brand-neutral cleanup; relicensing of Pulsar /
+Magnetar under Apache-2.0; ongoing institutional partnership
+development.
+\end{itemize}
+
+\textbf{4.} Lux holds or has filed for patents on, without limitation:
+Quasar BFT consensus; sampler-bias correction; Ringtail / Corona
+lattice threshold schemes; Unified VM Execution Interface with
+Pluggable Backends; Post-Quantum State Verification with Verkle
+Proofs; FHE precompile architecture; GPU-accelerated DEX matching
+engine; AI-optimized bytecode execution.
+
+\subsection*{B. The Lux Licensing Tier Structure}
+
+\textbf{5.} Lux publishes its software under a three-tier strategy:
+
+\textbf{6.} \textbf{Tier 1 (BSD-3-Clause)}: commodity infrastructure,
+free commercial use. \texttt{luxfi/node}, \texttt{luxfi/sdk},
+\texttt{luxfi/cli}, \texttt{luxfi/api}, \texttt{luxfi/codec},
+\texttt{luxfi/database}, \texttt{luxfi/p2p}, and approximately twenty-
+five (25) other modules.
+
+\textbf{7.} \textbf{Tier 2 (LEL v1.2)}: source-available, patent-
+protected. Per LEL \S\S 1 and 3, commercial rights granted only to
+``Authorized Networks'' --- the Lux Primary Network (NetworkID 1,
+ChainID 96369), Lux testnets and devnets, and ``L1/L2/L3 chains
+descending from the Lux Primary Network.''
+
+\textbf{8.} Per LEL \S 4, forks and competing networks prohibited.
+Per LEL \S 5, all patent rights reserved. Per LEL \S 8, license
+terminates automatically on breach. Modules: \texttt{luxfi/consensus},
+\texttt{luxfi/crypto}, \texttt{luxfi/mpc}, \texttt{luxfi/threshold},
+\texttt{luxfi/ringtail}, \texttt{luxfi/corona}, \texttt{luxfi/fhe},
+\texttt{luxfi/precompile}, \texttt{luxfi/captable},
+\texttt{luxfi/broker}, \texttt{luxfi/treasury},
+\texttt{luxfi/transfer}, \texttt{luxfi/compliance},
+\texttt{luxfi/hsm}, \texttt{luxfi/aml}, \texttt{luxfi/maker},
+\texttt{luxfi/warp}, among others.
+
+\textbf{9.} \textbf{Tier 3 (LRL--PR v1.0)}: research-only license.
+Section 3 expressly prohibits commercial use; Section 4 reserves all
+patent claims. Modules: \texttt{luxfi/vm}, \texttt{luxfi/staking},
+\texttt{luxfi/sampler}, \texttt{luxfi/dex} (Go bindings prior to its
+2026 move to fully proprietary).
+
+\textbf{10.} \textbf{Tier 4 (Closed Proprietary)}: the
+\texttt{\textasciitilde/work/luxcpp/*} tree (CUDA / Metal / WebGPU /
+FPGA / lattice GPU accelerators, the C++ DEX matching engine). Not
+currently in the Counterparty's production graph; access requires a
+separately negotiated Private-Moat Addendum.
+
+\subsection*{C. The Counterparty's Commercial Use of Lux IP}
+
+\textbf{11.} The Counterparty operates a registered Alternative
+Trading System, broker-dealer, and transfer-agent business in the
+United States, commercially deploying the validator binary
+\texttt{lqd} (built from \texttt{liquidityio/node}) on three live
+blockchain networks (Devnet ChainID 8675312, Testnet ChainID 8675310,
+Mainnet ChainID 8675309), each of which incorporates dozens of Lux
+modules.
+
+\textbf{12.} The Counterparty further deploys the Liquidity EVM,
+ATS, BD, and TA backend services, white-label tenants (MLC, VCC,
+TZERO, ReTokens, and others), and approximately 12,796 SecurityTokens
+on Devnet alone running on top of Lux precompiles.
+
+\textbf{13.} The companion audit (referenced internally as the
+license inventory) catalogues every Lux module directly imported.
+Approximately fifteen (15) directly-imported modules carry LEL or
+LRL--PR tier licenses requiring an executed commercial license.
+
+\textbf{14.} \textbf{No commercial license has ever been executed
+between Lux Industries Inc.\ and the Counterparty.} Outside counsel
+should verify the non-existence of any such instrument through
+document discovery.
+
+\textbf{15.} The Liquid chains do not currently activate the Lux
+Warp messaging precompile (canonical address
+\texttt{0x0200000000000000000000000000000000000005}). \textbf{Under
+the LEL Authorized-Network definition, a chain that does not maintain
+Lux consensus and Warp interop does not qualify for the LEL ecosystem-
+permissive grant.} The Liquid chains, as currently configured, do
+not qualify in code.
+
+\subsection*{D. The Counterparty Officer Team and Knowledge}
+
+\textbf{16.} Mr.\ Eric Choi (CEO) holds ultimate operational
+responsibility for technology licensing and IP compliance. His
+signature appears (or will appear) on the subscription documents for
+the current \$75M / \$1.1B-valuation raise; representations therein
+sound in his name. As of the date of this memorandum the round has
+not closed; the duty of disclosure is therefore current and ongoing.
+
+\textbf{17.} Mr.\ Austin Tromblye (CSO, prev.\ Acting CEO) ---
+discussed in \S II above, including the Franklin Templeton litigation
+history and the pre-Kelling ATS technical state.
+
+\textbf{18.} Mr.\ Coleman Church (BD CEO) --- FINRA-regulated
+responsibility for the BD's technology integrity; representations on
+FINRA filings sound in his name.
+
+\textbf{19.} Mr.\ Jayant Sonsurkar (CSO) --- Long-standing owner /
+admin on the Counterparty's GitHub organizations \texttt{satschel/*}
+(historic) and \texttt{liquidityio/*} (current rebuild org), giving
+him direct, contemporaneous, ongoing visibility into every Lux
+\texttt{LICENSE} file \textbf{as those files entered the
+Counterparty's build tree} on import --- the LEL, LRL-PR, BSD-3,
+GPL, LGPL, BUSL, MIT, and Apache markers travel with their source
+files into any tree that consumes them. \texttt{luxfi/*} GitHub-org
+admin was held by Lux's own engineering team (Mr.\ Bin, Mr.\ Kelling)
+on the upstream side; Mr.\ Sonsurkar did not have admin on
+\texttt{luxfi/*} itself, nor was he required to --- his
+software-supply-chain integrity duty attaches to imports into the
+Counterparty's own tree, where his admin access was present.
+
+\textbf{20.} The CSO role at a regulated digital-asset venue
+carrying ATS / BD / TA registrations includes (without limitation)
+software-supply-chain integrity oversight, identification of LEL /
+LRL--PR / GPL / LGPL restricted licenses in deployed dependencies,
+escalation of licensing mismatches to the CEO / BD CEO / GC, and
+implementation of remediation.
+
+\textbf{21.} On information and belief, Mr.\ Sonsurkar did not, at
+any time prior to the elevation of this matter by Mr.\ Bin, raise the
+LEL / LRL--PR mismatch internally, request a commercial license,
+include the unlicensed-IP status in regulatory compliance reviews, or
+flag the issue during current-raise diligence. By contrast, Mr.\ Bin
+(VPE at the Counterparty, concurrently CTO at Lux) did identify the
+mismatch through his own dual-role visibility and elevated it
+upstream. The omission by Mr.\ Sonsurkar --- the officer to whom that
+identification properly belonged --- is the central evidentiary fact
+supporting Count IV (breach of fiduciary duty) and Count V (aiding
+and abetting).
+
+\textbf{22.} Messrs.\ Choi, Tromblye, and Church each had operational
+or strategic visibility into the Counterparty's technology stack
+during the relevant period; the precise scope of each officer's
+knowledge will require diligence development.
+
+\subsection*{E. The Position of Mr.\ Zach Kelling}
+
+\textbf{23.} Mr.\ Kelling is the Founder of both Lux Industries
+Inc.\ and the Counterparty. He \textbf{currently serves as Chief
+Technology Officer of the Counterparty}. His operational authority
+covers the platform rebuild and the ongoing technical posture; the
+Counterparty's \textbf{commercial decisions and investor-facing
+representations are owned by Mr.\ Choi (CEO) and Mr.\ Tromblye (CSO)},
+not by Mr.\ Kelling. The dual role with Lux Industries Inc.\ (Founder,
+Architect, Chief Cryptographer) is contemporaneous and material to the
+discovery and disposition of this matter.
+
+\textbf{24.} Mr.\ Kelling is a \textbf{minority shareholder of Lux
+Industries Inc.}\ Counterparty equity position to be confirmed in
+diligence; the Counterparty's officer slate as represented to
+investors should be reconciled with any equity-grant records as part
+of the fact-development for any negotiation or filing.
+
+\textbf{25.} The factual record supports a finding that Mr.\ Kelling
+is \textbf{operationally engaged on technical rebuild and not engaged
+in the Counterparty's commercial direction or investor-facing
+representations}. His stated objective in supporting the elevation of
+this matter is an \textbf{equitable resolution that preserves the
+Counterparty's operational continuity and Mr.\ Bin's team's role in
+that continuity}, while recognising Lux Industries Inc.'s underlying
+contribution. He is not a principal actor in the commercial-
+representation conduct that grounds Counts IX (Securities Fraud), XI
+(Common-Law Fraud), or X (Lanham Act). \textbf{See \S XII for
+protective treatment, narrowed to his stated operational scope.}
+
+\subsection*{F. Pre-Kelling Technical State and the ACH Exploit}
+
+\textbf{26.} In the period immediately preceding Mr.\ Kelling's
+arrival as active Chief Technology Officer, the Counterparty's ATS
+platform was materially non-functional as a regulated alternative
+trading system. Specifically, on information and belief:
+
+\begin{itemize}[leftmargin=2em,itemsep=0.1em]
+\item The ATS \textbf{did not implement working time-price priority
+order matching} --- the foundational ordering principle of every
+regulated US alternative trading system, required by SEC Reg ATS
+for any venue purporting to operate as a securities trading facility.
+\item No functioning ATS pipeline existed end-to-end.
+\item \textbf{One day prior to Mr.\ Kelling's arrival as active CTO,
+the platform suffered an ACH-funding exploit that resulted in the
+theft of approximately \$40,000} via a trivial attack vector that
+should have been remediated by even baseline security review. The
+exploit evidences both the security posture of the platform under
+the pre-Kelling officer team and the absence of competent CSO
+oversight.
+\end{itemize}
+
+\textbf{27.} Upon his arrival, Mr.\ Kelling and his team (substantially
+overlapping with the Lux engineering team) rebuilt the ATS / BD / TA
+stack from the ground up, importing the Lux modules described in
+\S IV(C) as the foundation. \textbf{In substantial part, the
+technology that supports the current \$75M / \$1.1B-valuation raise was the Lux
+IP that Mr.\ Kelling brought across, integrated with the regulatory
+wrapper.}
+
+\textbf{28.} The factual proposition that the Counterparty's
+enterprise value as represented to investors is materially attributable
+to Lux-origin technology contributed by Mr.\ Kelling and the broader
+Lux team is supported by the contemporaneous technical record. This
+context bears on damages attribution (\S VI), Mr.\ Tromblye's
+credibility as a technology witness, the breach-of-fiduciary-duty
+count, and the protective treatment of Mr.\ Kelling (\S XII).
+
+\subsection*{G. The Current \$75M / \$1.1B-Valuation Capital Raise (Forum Markets, Lead)}
+
+\textbf{29.} The Counterparty is \textbf{currently undertaking a
+capital raise of approximately \$75 million at a \$1.1 billion
+valuation}. The round is led by \textbf{Forum Markets} (a
+publicly-traded company, formerly Ethzilla; ticker \textbf{[TICKER ---
+to be confirmed against SEC EDGAR]}), continuing in the lead-investor
+role from the prior round. As of the date of this memorandum, the
+Counterparty has \textbf{verbal commitments covering at least
+approximately half of the \$75 million round} (i.e.\ approximately
+\$37.5M soft-circled). \textbf{The round has not closed.} Funds have
+not been wired against current-round subscriptions; subscribers have
+not been issued securities in respect of the current round; the
+Counterparty's current and ongoing duty of disclosure to those
+subscribers remains live until closing.
+The subscription agreements, PPM, and side letters require outside-
+counsel review for representations regarding (a) Counterparty
+ownership of the underlying technology stack, (b) licensing status of
+all third-party IP, (c) related-party transactions, (d) the CSO's
+and BD CEO's compliance attestations, and (e) technology disclosures
+in the risk factors section.
+
+\textbf{30.} To the extent the current-raise subscription documents represent or omit
+material facts regarding the Counterparty's ownership or licensed
+access to Lux IP, those representations are independently actionable
+under Section 10(b) of the Securities Exchange Act and Rule 10b-5.
+See Count IX, infra.
+
+% ─────────────────────────────────────────────────────────────────
+\section*{V.\ Causes of Action Available to Lux Industries Inc.}
+
+\subsection*{Count I --- Misappropriation of Trade Secrets (DTSA, 18 U.S.C.\ \S 1836)}
+
+Lux's unpublished optimizations, integration know-how, architectural
+documents, deployment recipes, MPC operational procedures, sampler-
+bias remediation, and pre-publication private-repository code qualify
+as trade secrets. Mr.\ Sonsurkar's continuing repository access
+without an executed license, coupled with the licensing-mismatch
+silence, supports misappropriation by improper means.
+
+\textbf{Remedies}: Injunction (18 U.S.C.\ \S 1836(b)(3)(A)); actual
+damages and unjust enrichment (\S (B)); reasonable royalty in lieu
+(id.); exemplary damages up to 2$\times$ for willful and malicious
+misappropriation (\S (C)); attorneys' fees (\S (D)); seizure if
+record warrants (\S 1836(b)(2)).
+
+\subsection*{Count II --- Copyright Infringement (17 U.S.C.\ \S 501)}
+
+Lux owns copyright in every source file under \texttt{luxfi/*}.
+Copyright notices are present in source headers. The Counterparty
+has copied by direct import in \texttt{go.mod}, container-image
+embedding, binary distribution to validator nodes, and on-chain
+deployment of derivative SecurityTokens.
+
+\textbf{Remedies}: Actual damages and infringer's profits, \S 504(b);
+or statutory damages up to \$150,000 per work willfully infringed,
+\S 504(c)(2); injunction (\S 502); impoundment (\S 503); attorneys'
+fees and costs (\S 505).
+
+\subsection*{Count III --- Patent Infringement (35 U.S.C.\ \S 271)}
+
+Lux holds or has filed for patents covering the inventions
+enumerated in \S IV(A)(4). The Counterparty's deployment of Quasar
+consensus, Ringtail / Corona thresholds, the sampler-bias correction,
+the Liquid EVM substrate, the FHE precompile activations, and the
+DEX matching engine each implicate one or more patent claims.
+
+\textbf{Remedies}: Reasonable royalty floor (35 U.S.C.\ \S 284); lost
+profits where established; injunction (\S 283); treble damages for
+willfulness (\S 284); attorneys' fees in exceptional cases (\S 285).
+
+\subsection*{Count IV --- Breach of Fiduciary Duty (Del., against Jayant Sonsurkar individually)}
+
+As a corporate officer, defendant owes the corporation duties of
+care and loyalty. Mr.\ Sonsurkar's failure to identify and flag the
+LEL / LRL--PR licensing mismatch throughout his tenure is at minimum
+gross negligence in the CSO duty of care; if the record supports
+knowledge or willful blindness, it crosses into duty-of-loyalty
+breach.
+
+\subsection*{Count V --- Aiding and Abetting Breach (Del., against Messrs.\ Choi, Tromblye, Church)}
+
+Per \emph{Malpiede v.\ Townson}, 780 A.2d 1075 (Del.\ 2001): (i) a
+fiduciary relationship; (ii) breach; (iii) knowing participation by
+the non-fiduciary; (iv) damages. To the extent the named officers
+had actual or constructive knowledge of the mismatch and continued to
+direct commercial operations, they aided and abetted Mr.\ Sonsurkar's
+breach.
+
+\subsection*{Count VI --- Unjust Enrichment}
+
+The Counterparty's commercial deployment of Lux IP without an
+executed license enriches the Counterparty at Lux's expense; the
+LEL and LRL--PR expressly negate any justification.
+
+\subsection*{Count VII --- Conversion}
+
+The Counterparty's deployment of LRL--PR-protected patent-bearing
+modules constitutes intentional interference with Lux's exclusive
+rights.
+
+\subsection*{Count VIII --- Tortious Interference with Prospective Economic Advantage}
+
+The Counterparty's white-label tenants (MLC, VCC, TZERO, ReTokens)
+constitute particular instances of interference with Lux's
+commercial-license pipeline with third-party ecosystem partners.
+
+\subsection*{Count IX --- Securities Fraud (Rule 10b-5)}
+
+To the extent the current \$75M / \$1.1B-valuation raise is supported by representations or
+omissions regarding the Counterparty's IP ownership / licensing
+status, elements of Rule 10b-5 are met. \textbf{Lux's primary
+utility on this count is collateral leverage rather than direct
+recovery; standing analysis is for outside counsel.}
+
+\subsection*{Count X --- Lanham Act False Advertising (15 U.S.C.\ \S 1125(a))}
+
+The Counterparty's marketing materials describe its technology stack
+(post-quantum cryptography, FHE-based dark-pool matching, MPC
+custody, multi-chain architecture, Quasar-derived consensus) in
+terms that ascribe ownership or proprietary control without
+disclosing the Lux origin or the conditional / unlicensed nature of
+the access.
+
+\subsection*{Count XI --- Common-Law Fraud}
+
+To the extent Counterparty officers made representations to Lux
+personnel that licensing arrangements would be formalized in due
+course, and Lux relied to its detriment by continuing engineering
+contribution without an executed agreement, common-law fraud lies.
+
+\subsection*{Count XII --- Civil Conspiracy}
+
+The Counterparty officer team's concerted commercial deployment of
+unlicensed Lux IP and capital-raising on the back of that deployment
+supports civil-conspiracy joint and several liability.
+
+% ─────────────────────────────────────────────────────────────────
+\section*{VI.\ Damages Analysis}
+
+\subsection*{Small Scenario (Path A --- Negligent Posture)}
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Back-license value (12 yr at \$2.5M/yr base) & \$30M \\
+Pre-judgment interest (5\%, simple) & \$10M \\
+Royalty component (1.5\% of estimated GR) & \$10M \\
+Forward-looking license value (NPV) & \$30M \\
+\midrule
+\textbf{Subtotal --- Small Scenario} & \textbf{\$80M} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Medium Scenario (Path B --- Mixed-Knowledge, Contested)}
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Small-Scenario base & \$80M \\
+DTSA 2$\times$ exemplary on willful misappropriation & +\$30M \\
+Patent willfulness component (selective trebling) & +\$40M \\
+Disgorgement on current-raise attribution (5\% of enterprise value, TODO: rebase per counsel) & +\$55M \\
+Attorneys' fees and costs & +\$10M \\
+\midrule
+\textbf{Subtotal --- Medium Scenario} & \textbf{\$215M} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Big Scenario (Path B Fully Litigated, Adverse Officer Record)}
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Base + interest + royalty & \$80M \\
+DTSA full 2$\times$ exemplary & +\$80M \\
+Patent full 3$\times$ trebling on willfulness & +\$120M \\
+Disgorgement on current-raise attribution (15--20\% of enterprise value, TODO: rebase per counsel) & +\$200M \\
+Lanham Act + Lanham fees & +\$10M \\
+Securities fraud (if Lux can establish standing) & +\$50M \\
+Attorneys' fees, costs, pre-judgment interest & +\$50M \\
+\midrule
+\textbf{Subtotal --- Big Scenario} & \textbf{\$590M} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Opportunity-Cost Damages: 90-Day Bandwidth Diversion}
+
+\textbf{The damages framework above does not yet capture a distinct
+and significant category of harm: the opportunity cost to Lux of
+having Mr.\ Kelling's --- and the broader Lux engineering team's ---
+bandwidth diverted to the Counterparty's platform and to a
+constellation of related ventures during a critical 90-day window.
+The git record is unambiguous.}
+
+\textbf{Quantification (rolling 90-day window) --- Counterparty
+primary codebase.} Audit of the \texttt{liquidityio/*} GitHub
+organization for commits attributable to Mr.\ Kelling:
+
+\begin{center}
+\begin{small}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Repo} & \textbf{Zach commits} & \textbf{Total commits} & \textbf{Zach \%} \\
+\midrule
+\texttt{liquidityio/ats}        & 806    & 1{,}426 & 57\% \\
+\texttt{liquidityio/bd}         & 388    & 751     & 52\% \\
+\texttt{liquidityio/ta}         & 208    & 364     & 57\% \\
+\texttt{liquidityio/mpc}        & 31     & 95      & 33\% \\
+\texttt{liquidityio/evm}        & 23     & 32      & 72\% \\
+\texttt{liquidityio/fhe}        & 10     & 14      & 71\% \\
+\texttt{liquidityio/iam}        & 27     & 29      & 93\% \\
+\texttt{liquidityio/node}       & 338    & 380     & 89\% \\
+\texttt{liquidityio/operator}   & 354    & 406     & 87\% \\
+\texttt{liquidityio/universe}   & 1{,}436 & 1{,}920 & 75\% \\
+\texttt{liquidityio/contracts}  & 72     & 176     & 41\% \\
+\texttt{liquidityio/dex}        & 24     & 32      & 75\% \\
+\texttt{liquidityio/platform}   & 36     & 51      & 71\% \\
+\texttt{liquidityio/superadmin} & 243    & 338     & 72\% \\
+\texttt{liquidityio/exchange}   & 522    & 1{,}170 & 45\% \\
+\texttt{liquidityio/console}    & 28     & 38      & 74\% \\
+\texttt{liquidityio/ui}         & 27     & 143     & 19\% \\
+\texttt{liquidityio/sdk}        & 30     & 30      & 100\% \\
+\texttt{liquidityio/sdk-go}     & 9      & 9       & 100\% \\
+\texttt{liquidityio/cli}        & 114    & 117     & 97\% \\
+\midrule
+\textbf{Subtotal (Counterparty primary, 90-day)} & \textbf{4{,}726} & \textbf{7{,}521} & \textbf{63\%} \\
+\bottomrule
+\end{tabular}
+\end{small}
+\end{center}
+
+\textbf{Quantification --- related-venture codebases.} The audit
+extends across five additional venture trees on which Mr.\ Kelling's
+bandwidth was concurrently directed during the same 90-day window:
+
+\begin{center}
+\begin{small}
+\begin{tabular}{lrrl}
+\toprule
+\textbf{Venture tree} & \textbf{Zach commits} & \textbf{LOC (add+del)} & \textbf{Note} \\
+\midrule
+VCC (vcc/exchange + contracts + wallet)        & 143 & 3{,}038{,}420 & \textbf{100\% new venture} (white-label tenant) \\
+MLC (mlc/exchange + contracts + wallet)        & 153 & 3{,}044{,}377 & \textbf{100\% new venture} (white-label tenant) \\
+EquityTable (loan-funding-engine + app)        & 98  & 681{,}666     & \textbf{100\% new venture} \\
+OnyxPlus (admin + verify + onyxd + onboarding) & 188 & 57{,}379      & \textbf{Largely 100\% new venture} (KYC/ID JV) \\
+LiquidityArchive (legacy + simplici-*)         & 683 & 9{,}541{,}566 & Legacy / archive maintenance \\
+\midrule
+\textbf{Subtotal (related ventures, 90-day)}   & \textbf{1{,}265} & \textbf{16{,}363{,}408} & \\
+\bottomrule
+\end{tabular}
+\end{small}
+\end{center}
+
+\textbf{Grand totals across all six venture trees (90-day window):}
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+\textbf{Total Zach commits (all 6 trees)} & \textbf{5{,}991} \\
+\textbf{Total LOC churn (add + del across all 6 trees)} & \textbf{$\sim$93 million} \\
+\textbf{LOC churn in Counterparty primary (top 8 repos)} & \textbf{$\sim$77 million} \\
+\textbf{Distinct working days in \texttt{ats/} alone} & \textbf{55 (six days/week)} \\
+\textbf{Repos where Zach $>$70\% of all commits} & \textbf{12 of 20 Counterparty repos} \\
+\textbf{Repos where Zach $=$ 100\% of all commits} & \textbf{2 (\texttt{sdk}, \texttt{sdk-go})} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Three of the five related ventures (VCC, MLC, EquityTable) were
+authored entirely from scratch during the 90-day window} ---
+representing approximately \textbf{6.8 million lines} of net new code
+across companies that the Counterparty offers to its tenants and
+partners. A fourth (OnyxPlus, the KYC/ID joint venture) was largely
+new in the same window. This is not maintenance contribution; this
+is greenfield construction of multiple companies.
+
+\textbf{Mr.\ Kelling's contribution to Lux upstream in the same
+90-day window (the foundational Lux IP that powers the
+Counterparty's stack):}
+
+\begin{center}
+\begin{small}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Lux repo} & \textbf{Zach commits} & \textbf{Total commits} \\
+\midrule
+\texttt{luxfi/node}             & \textbf{0} & 179 \\
+\texttt{luxfi/consensus}        & \textbf{0} & 104 \\
+\texttt{luxfi/crypto}           & \textbf{0} & 64 \\
+\texttt{luxfi/evm}              & \textbf{0} & 99 \\
+\texttt{luxfi/vm}               & \textbf{0} & 27 \\
+\texttt{luxfi/precompile}       & \textbf{0} & 98 \\
+\midrule
+\textbf{Total (90-day window)} & \textbf{0} & \textbf{571} \\
+\bottomrule
+\end{tabular}
+\end{small}
+\end{center}
+
+\textbf{The contrast is decisive}: 5,991 commits and $\sim$93M LOC
+of Zach's bandwidth into Counterparty-side ventures versus exactly
+zero commits to the upstream Lux repositories he is Founder and
+Chief Cryptographer of.
+
+\textbf{Value-creation rate translation.} The Counterparty's reported
+current-round valuation in the active raise is approximately \$1.1 billion. The platform supporting that raise was substantially
+built or rebuilt by Mr.\ Kelling during the 90-day window. The
+implied value-creation rate is approximately \textbf{\$1.1B / 90
+days = \$12.2M per day} of diverted attention --- and that figure
+captures only the Counterparty's primary codebase; it does not yet
+include the enterprise value of the three additional 100\%-new
+ventures (VCC, MLC, EquityTable) and the largely-new OnyxPlus JV.
+Counting those, the per-day value-creation rate of Mr.\ Kelling's
+bandwidth during the 90-day window is materially higher than the
+\$12.2M figure above.
+
+\textbf{The opportunity cost to Lux} --- measured by what Lux's own
+roadmap would have produced during the same window had Mr.\
+Kelling's attention been available to Lux upstream --- \textbf{is
+bounded above by that rate and below by the proportional founder-
+share of Lux's enterprise trajectory}.
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+\textbf{Component} & \textbf{Range} \\
+\midrule
+Bandwidth diversion at 50\% rate (90 days) & \$500M -- \$600M \\
+At 25\% rate & \$250M -- \$300M \\
+At 10\% rate (conservative) & \$100M -- \$120M \\
+\midrule
+\textbf{Conservative opportunity-cost claim} & \textbf{\$100--300M} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This component is independent of and additive to the IP damages
+above. \textbf{It is the single most striking quantitative fact in
+the memorandum} and should be lead-in evidence for Mr.\ Dupont in
+opening negotiation.
+
+\subsection*{Damages Summary (Including Opportunity Cost)}
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Scenario} & \textbf{IP damages} & \textbf{+ Opp.\ Cost} \\
+\midrule
+Small (Path A, settlement context) & \$80M & \$180--380M \\
+Medium (Path B, mixed-record litigation) & \$215M & \$315--515M \\
+Big (Path B, full-record litigation w/ multipliers) & \$590M & \$690--890M \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ─────────────────────────────────────────────────────────────────
+\section*{VII.\ Trading-Fee Revenue Projections (User-Scale Analysis)}
+
+The following projects the Counterparty's enterprise-value trajectory
+at four user-base milestones and computes Lux's economic interest at
+each under a proposed 10\% equity stake.
+
+\subsection*{Annual Revenue, Enterprise Value, and Lux 10\% Stake}
+
+\begin{center}
+\begin{small}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Scenario} & \textbf{Users} & \textbf{Revenue} & \textbf{Enterprise Value} & \textbf{Lux 10\%} \\
+\midrule
+\multicolumn{5}{l}{\textit{Conservative ARPU (\$50/yr)}} \\
+Stage 1 & 100K & \$5M & \$50M (10$\times$) & \$5M \\
+Stage 2 & 1M & \$50M & \$500M (10$\times$) & \$50M \\
+Stage 3 & 10M & \$500M & \$5B (10$\times$) & \$500M \\
+Stage 4 & 100M & \$5B & \$50B (10$\times$) & \$5B \\
+\midrule
+\multicolumn{5}{l}{\textit{Base ARPU (\$100/yr)}} \\
+Stage 1 & 100K & \$10M & \$150M (15$\times$) & \$15M \\
+Stage 2 & 1M & \$100M & \$1.5B (15$\times$) & \$150M \\
+Stage 3 & 10M & \$1B & \$15B (15$\times$) & \$1.5B \\
+Stage 4 & 100M & \$10B & \$150B (15$\times$) & \textbf{\$15B} \\
+\midrule
+\multicolumn{5}{l}{\textit{Premium ARPU (\$200/yr)}} \\
+Stage 1 & 100K & \$20M & \$400M (20$\times$) & \$40M \\
+Stage 2 & 1M & \$200M & \$4B (20$\times$) & \$400M \\
+Stage 3 & 10M & \$2B & \$40B (20$\times$) & \$4B \\
+Stage 4 & 100M & \$20B & \$400B (20$\times$) & \textbf{\$40B} \\
+\bottomrule
+\end{tabular}
+\end{small}
+\end{center}
+
+\textbf{Lux's 10\% equity, retained through the growth curve, is
+worth between \$5M (Stage 1 Conservative) and \$40B (Stage 4
+Premium).} Mid-case Base ARPU at 100M users implies \$15B of Lux
+equity value.
+
+% ─────────────────────────────────────────────────────────────────
+\section*{VIII.\ Strategic Partnership Upside}
+
+Lux brings substantial commercial value to a partnership-resolution
+of this dispute. This section enumerates what the deal team can
+offer as upside in any negotiation tier.
+
+\subsection*{First Major Client: AvaTrade --- \$70B/month Trading Volume}
+
+\textbf{Lux has secured AvaTrade as the first major client for the
+combined Lux + Counterparty venue, with an estimated \$70 billion
+per month in trading volume routed through the joint architecture.}
+AvaTrade is an established multi-asset broker with operations across
+multiple regulated jurisdictions; the partnership agreement
+underlying this arrangement is documented separately at
+\texttt{\textasciitilde/work/lux/legal/partnerships/avatrade/Lux\_AvaTrade\_Strategic\_Partnership\_Agreement.pdf}.
+
+At 8 bps blended take-rate on \$70B/mo = \$5.6M/mo = \textbf{\$67M
+per year in fee revenue from this single client alone}. At Stage-2-
+plus volume routing, the AvaTrade contribution materially exceeds
+the Counterparty's current revenue base and is, by itself, the
+strongest argument for partnership over litigation.
+
+\subsection*{Crypto-Exchange Conversion at 8 Basis Points (Floor)}
+
+A specific deliverable Lux brings under the partnership: \textbf{the
+ability to offer crypto-exchange conversion at 8 basis points} ---
+materially undercutting the incumbent fee structure at major US
+crypto venues (Coinbase / Kraken / Gemini at 50--200 bps; Robinhood
+PFOF-equivalent at 35--85 bps; institutional desks at 5--15 bps
+floor but with size minimums). The 8-bps floor is enabled by Lux's
+direct exchange and liquidity infrastructure and is a competitive
+moat for the joint Lux + Counterparty venue.
+
+\subsection*{OnyxPlus / Telos JV ID Verification at Internal Cost}
+
+The Lux--Telos joint venture (OnyxPlus) provides identity verification
+infrastructure operating at the Lux ecosystem's internal cost basis
+--- materially below merchant pricing for equivalent
+KYC/AML/document/biometric services. Under the SCLA, \textbf{the
+Counterparty receives access to OnyxPlus ID verification at Lux's
+internal cost, not at market rates}. The annual savings depend on
+the Counterparty's user-onboarding velocity but at Stage-2-plus
+scale run into the tens of millions per year.
+
+\subsection*{Co-Branding for Lux-Network Chains}
+
+\textbf{All Lux-network L1/L2/L3/L4 chains receive explicit
+co-branding on the Counterparty's customer-facing surfaces}: the
+Counterparty's marketing, the venue's chain selector, the
+SecurityToken issuance pages, and any institutional partnership
+collateral. This brand co-positioning is a non-negotiable term
+under the SCLA (\S XI).
+
+\subsection*{Real-World Asset Pipeline}
+
+Lux operates the infrastructure layer behind multi-billion-dollar
+RWA tokenization pipelines. Post-SCLA, the Counterparty is the
+natural US-regulated listing destination:
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.1em]
+\item Tokenized US securities + private equity (Carta ingestion).
+\item Tokenized real estate / NNN-SPV-wrapped property exposures.
+\item Tokenized commodities (gold, silver, FX, energy).
+\item Tokenized fund LP interests.
+\item Tokenized fixed-income.
+\item Tokenized music + IP royalty streams.
+\item Tokenized art and collectibles ($>$\$1M lots).
+\end{itemize}
+
+\textbf{Conservative estimate of incremental deal flow under the
+SCLA: \$5--15 billion in nominal asset value over the first 12--24
+months post-close.}
+
+\subsection*{Reciprocal License to Counterparty ATS / BD / TA / Listed Securities --- Lux's Forward Venue Strategy}
+
+\textbf{Lux Industries Inc.\ does not presently operate an
+alternative trading system or broker-dealer in the United States.}
+However, Lux's historical regulatory posture and its forward strategy
+include venue licenses in multiple jurisdictions, and the reciprocal
+license to the Counterparty's ATS / BD / TA / listed-securities
+surfaces described in \S XI(9) is intended to give Lux operational
+optionality across that footprint as it matures.
+
+\textbf{Historical native support:} Lux (and Lux Partners Limited
+as predecessor) previously operated regulatory arrangements in the
+\textbf{Isle of Man (IOM)} (IOM Financial Services Authority
+supervision) and \textbf{Luxembourg} (Commission de Surveillance du
+Secteur Financier engagement). The IOM and Luxembourg footprints
+provided native EU-passportable and offshore-fund-eligible regulatory
+reach.
+
+\textbf{Forward expansion:} Lux is actively evaluating venue-license
+applications across the United States (Reg ATS), United Kingdom
+(FCA MTF or equivalent), European Union (MiCA-compliant Trading
+Platform), Singapore (MAS Capital Markets Services Licence +
+Recognised Market Operator), and the UAE (VARA). Each license,
+when obtained, becomes a venue at which Lux may operate the
+Counterparty-licensed ATS / BD / TA technology under \S XI(9).
+
+\textbf{Cross-listing rights:} Every security that lists on the
+Counterparty venue is available for cross-listing on any Lux-network
+or Lux-affiliate venue, and every security that lists on a Lux
+venue is available for cross-listing on the Counterparty's venue.
+
+\subsection*{Banking Licenses --- SF Private Bank Partnership and Global Coverage}
+
+\textbf{Lux holds a strategic partnership with SF Private Bank
+(``SFPB'') and adjacent financial institutions that, in combination,
+provide regulated coverage on every populated continent.} The
+combined licensed footprint:
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.1em]
+\item \textbf{North America}: United States (federal banking partner,
+FDIC-insured rails); Canada (chartered banking partner, CDIC-insured).
+\item \textbf{Europe}: Sweden (Finansinspektionen-supervised, EU
+passport); historical IOM (Financial Services Authority); historical
+Luxembourg (CSSF); ongoing UK (FCA) and Switzerland (FINMA) expansion.
+\item \textbf{Asia-Pacific}: Singapore (MAS Capital Markets Services
+and banking); New Zealand (RBNZ-licensed deposit-taker); ongoing
+Hong Kong (SFC type-1 / type-7) and Japan (JVCEA) expansion.
+\item \textbf{Middle East}: UAE (VARA-supervised; DIFC / ADGM
+counterparty relationships).
+\item \textbf{Latin America}: regional partnerships under bilateral
+arrangements; specific licensing on a case-by-case basis.
+\item \textbf{Africa}: pilot arrangements; specific licensing on a
+case-by-case basis.
+\end{itemize}
+
+Services Lux can deliver under the SCLA include Banking-as-a-Service
+(BaaS), Payment Service Provider (PSP) rails, and \textbf{a custody
+solution that materially undercuts the Fireblocks and BitGo
+incumbents on price} (built on the same MPC infrastructure already
+in the Counterparty's production).
+
+\textbf{Estimated independent cost for the Counterparty to acquire
+equivalent global license suite: \$57--140M in direct regulatory
+and capital expenditure, plus 5--7 years of timeline.} See Schedule
+C.
+
+\subsection*{International Distribution: M7 and 1B+ End-User Reach}
+
+Through Hanzo Inc., the broader corporate family, and the Lux
+ecosystem partnerships, the M7 global initiatives provide
+distribution access to more than 1 billion end-users across consumer,
+institutional, and retail channels. Post-SCLA, Lux's international
+counterparty network operates as a Reg-S-compatible distribution
+channel for Counterparty-listed assets.
+
+\subsection*{Hanzo Inc.\ Portfolio Precedents}
+
+Hanzo Inc., the venture studio under which the Lux relationship has
+historically operated, has applied the IP-in-kind founder-equity
+model successfully to multiple spawned unicorn-class companies:
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.1em]
+\item \textbf{Damon Motorcycles} --- electric / smart-motorcycle company.
+\item \textbf{Triller} --- short-form video / social platform.
+\item \textbf{Bellabeat} --- women's health wearables.
+\item \textbf{Unicorn Gold} --- precious-metals tokenization platform.
+\item \textbf{Lux Network} --- itself a Hanzo-spawn outcome.
+\item \textbf{Zoo Labs Foundation / Zoo Network} --- decentralized AI
+research network.
+\end{itemize}
+
+Retained-parent-equity range across the portfolio: 10\%--40\%. The
+10\% ask in the Counterparty is at the bottom of that internal range.
+
+\subsection*{The \$100B--\$1T Target Institution}
+
+The combined Lux + Counterparty vision is the construction of a
+\$100-billion-to-\$1-trillion-class institution at the intersection
+of tokenized real-world assets, post-quantum-secure infrastructure,
+regulated US securities markets, and global distribution. The deal
+team should treat the negotiation not as a zero-sum settlement but
+as the founding-document of a partnership creating value materially
+in excess of the negotiating range.
+
+% ─────────────────────────────────────────────────────────────────
+\section*{IX.\ Wait vs.\ Settle Analysis}
+
+\textbf{Forces favoring delay:} equity appreciation; royalty accrual;
+current-raise disgorgement expansion; pattern-of-conduct evidence.
+
+\textbf{Forces favoring settlement now:} statutory damages caps don't
+grow with delay (DTSA at 2$\times$; patent at 3$\times$); dilution risk
+on Lux's equity component; operational risk (engineer-around); evidence
+preservation; DTSA 3-year limitations from discovery; Lux operating
+runway; negotiating leverage compounds short-term then evaporates if
+the Counterparty hits trouble; public visibility window.
+
+\textbf{Recommendation:} \textbf{Settle now, with strong protective
+terms} --- significant cash component, 10\%+ equity with weighted-
+average broad-based anti-dilution, full ratchet on down-rounds, pro-
+rata participation, tag-along and co-sale rights, 1+1 mandatory board
+seats, 99-year exclusive USA-market license to the Counterparty
+(conditional), patent grant, AvaTrade routing, 8 bps conversion floor,
+OnyxPlus access at internal cost, co-branding for Lux chains, and
+reciprocal permanent license to Counterparty ATS / BD / TA / listed-
+securities / cross-listings (\S XI). \textbf{Statutory damages caps
+do not grow with delay; the equity does.} Locking equity now with
+strong anti-dilution captures the future-growth narrative without
+the operational risks of continued reliance on a deteriorating
+informal arrangement.
+
+% ─────────────────────────────────────────────────────────────────
+\section*{X.\ Settlement Triangulation (Cash / Equity / Features Matrix)}
+
+\subsection*{Settlement Sizing Tiers}
+
+\begin{center}
+\begin{small}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Tier} & \textbf{Cash} & \textbf{Equity} & \textbf{Lux Nominal} & \textbf{Implied Posture} \\
+\midrule
+Floor (S--)       & \$5M   & 5\%   & \$60M   & Soft settle; preserve relationship \\
+Small (S)         & \$10M  & 10\%  & \$120M  & Approach baseline (recommended floor) \\
+Medium (M)        & \$20M  & 15\%  & \$185M  & Path B leverage applied softly \\
+Big (B)           & \$30M  & 25\%  & \$305M  & Full Path B post-investigation \\
+Aspirational (A+) & \$50M  & 35\%  & \$435M  & Litigation-credible ceiling \\
+50/50 (max)       & \$100M & 50\%  & \$650M  & Full partnership re-cap \\
+\bottomrule
+\end{tabular}
+\end{small}
+\end{center}
+
+\subsection*{Cash vs.\ Equity Mix Sensitivity (at \$120M floor)}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Mix} & \textbf{Cash} & \textbf{Equity at \$1.1B valuation} \\
+\midrule
+All-cash & \$120M & 0\% \\
+Heavy cash & \$60M & 5.5\% \\
+Balanced (recommended) & \$10M & 10\% \\
+Light cash & \$5M & 10.5\% \\
+All-equity & \$0 & 11\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Feature-Unlock by Settlement Tier}
+
+\begin{center}
+\begin{small}
+\begin{tabular}{p{6cm} ccccc}
+\toprule
+\textbf{Forward-value feature} & \textbf{S--} & \textbf{S} & \textbf{M} & \textbf{B} & \textbf{A+} \\
+\midrule
+LEL/LRL--PR perpetual license & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+Patent grant on covered IP & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+Maintenance \& support of upstream OSS & & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+99-year exclusive USA-market license & & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+1 Lux + 1 independent director seat & & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+RWA pipeline routing into Counterparty & & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+AvaTrade flow routing into venue & & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+8 bps crypto-conversion floor & & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+OnyxPlus ID verify at internal cost & & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+Co-branding for Lux-network chains & & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+Reciprocal license to ATS/BD/TA & & & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+SFPB banking-license access (BaaS, PSP) & & & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+Custody undercutting Fireblocks & & & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+International M7 distribution channels & & & & $\checkmark$ & $\checkmark$ \\
+Closed-source (\texttt{luxcpp}) GPU access & & & & & $\checkmark$ \\
+Joint go-to-market programs & & & & $\checkmark$ & $\checkmark$ \\
+\bottomrule
+\end{tabular}
+\end{small}
+\end{center}
+
+\subsection*{Damages-vs-Settlement Triangulation}
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Outcome path} & \textbf{Lux receives} & \textbf{Counterparty pays} \\
+\midrule
+Settle at Floor (S--) & \$60M nominal & \$5M cash + 5\% equity \\
+Settle at Small (S, recommended) & \$120M nominal & \$10M cash + 10\% equity \\
+Settle at Medium (M) & \$185M nominal & \$20M cash + 15\% equity \\
+Settle at Big (B) & \$305M nominal & \$30M cash + 25\% equity \\
+Settle at Aspirational (A+) & \$435M nominal & \$50M cash + 35\% equity \\
+Litigate: Small (Path A) & \$80M & \$80M cash, no equity \\
+Litigate: Medium (Path B mixed) & \$215M & \$215M, no equity \\
+Litigate: Big (Path B full) & \$590M & \$590M, no equity \\
+Litigate + Opp.\ Cost (Big) & \$690--890M & idem, no equity, no relationship \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Settlement dominates litigation at every tier for both sides,
+provided the equity component is properly valued.}
+
+% ─────────────────────────────────────────────────────────────────
+\section*{XI.\ Mandatory Terms (Lux's Floor in Any Settlement)}
+
+The following terms are non-negotiable. Any settlement at any tier
+must include each of them.
+
+\textbf{1.} \textbf{Board composition --- expansion to a minimum of
+seven (7) directors total, with structured composition.} The
+Counterparty's existing three-director board failed to identify the
+licensing mismatch over the relevant period despite having a
+maintainer-access-empowered CSO whose duty included precisely that
+review. \textbf{The 3-person board structure is, in light of that
+record, an inadequate governance vehicle going forward}, and the
+disinterested-investor case for board expansion is unambiguous.
+
+The mandatory composition is:
+
+\begin{itemize}[leftmargin=2em,itemsep=0.1em]
+\item \textbf{Three (3) existing director seats retained} from the
+current board.
+\item \textbf{One (1) Lux director seat}, for Lux Industries Inc.'s
+direct representative (Mr.\ Pahlavi's designate).
+\item \textbf{Three (3) mutually-agreed independent director seats},
+each nominee with no prior commercial or personal relationship to
+either Lux or the Counterparty, serving as the ongoing governance
+anchor of the SCLA.
+\end{itemize}
+
+Effective at closing. \textbf{No ownership-maintenance condition
+attaches to the Lux seat.} The structure ensures (a) no single
+faction (existing officers, Lux, or independents) holds majority
+voting power; (b) the independent block of three directors provides
+the disinterested-quorum threshold for any related-party transaction
+under Delaware General Corporation Law \S 144; and (c) the
+Counterparty's institutional governance moves from informal,
+founder-controlled posture to formal, multi-faction supervision
+appropriate to a venue valued in the \$1B+ range with FINRA / SEC
+exam exposure.
+
+In the alternative (a 7-director soft floor that Lux will accept
+under appropriate compensating concessions), the composition may
+shift to: 2 existing seats retained + 2 Lux directors + 3 independent
+seats. This variant displaces one of the existing seats and
+strengthens Lux's voting position; Lux's deal team may invoke this
+alternative as leverage if the Counterparty resists the principal
+structure above.
+
+\textbf{2.} \textbf{99-year exclusive USA-market license to the
+Counterparty} for the LEL/LRL--PR portfolio in scope. Conditional on
+maintenance of all SCLA covenants. Material breach terminates
+exclusivity. Outside the USA, Lux retains the right to license to
+other parties.
+
+\textbf{3.} \textbf{Anti-dilution: weighted-average broad-based,
+with full ratchet on any down-round below the Lux issuance price.}
+
+\textbf{4.} \textbf{Pro-rata participation right} on all future
+Counterparty preferred financings.
+
+\textbf{5.} \textbf{Tag-along and co-sale rights} on any founder
+transfer exceeding 1\% of fully-diluted equity.
+
+\textbf{6.} \textbf{Information rights}: quarterly and annual
+financials; all board materials and minutes; all share-issuance and
+option-grant resolutions; counsel and accountant access under NDA.
+
+\textbf{7.} \textbf{Patent grant} on all current and future Lux
+patents covering the licensed IP. Worldwide; perpetual; royalty-free
+under the SCLA; expressly inclusive of patents not yet filed at SCLA
+execution.
+
+\textbf{8.} \textbf{Maintenance and support of upstream Lux OSS}:
+continuing on the shared-engineering basis as today, no separate
+maintenance fee.
+
+\textbf{9.} \textbf{Reciprocity --- Permanent license to Counterparty
+ATS, BD, TA, listed securities, and cross-listings.} As symmetric
+consideration for Lux's perpetual IP license, the Counterparty grants
+Lux Industries Inc.\ (and any Lux-controlled affiliate or Lux-network
+L1/L2/L3/L4 chain maintaining Lux consensus and Warp interop):
+
+\begin{itemize}[leftmargin=2em,itemsep=0.1em]
+\item \textbf{Permanent, royalty-free, non-exclusive license to the
+Counterparty's ATS technology and operational know-how}, sufficient
+for Lux to operate (or sublicense to a Lux-controlled regulated
+entity) an ATS in any jurisdiction where Lux holds or obtains the
+necessary venue license.
+\item \textbf{Permanent, royalty-free, non-exclusive license to the
+Counterparty's BD technology and know-how} on equivalent terms.
+\item \textbf{Permanent, royalty-free, non-exclusive license to the
+Counterparty's TA technology and know-how} on equivalent terms.
+\item \textbf{Reciprocal listing and cross-listing rights}: every
+security listed on the Counterparty venue is available for
+cross-listing on any Lux venue, and every security listed on a Lux
+venue is available for cross-listing on the Counterparty venue, on
+no-less-favorable terms.
+\item \textbf{Sublicensing rights}: Lux may sublicense to Lux-
+controlled jurisdictions and operating affiliates, including the
+IOM, Luxembourg, FCA, MAS, VARA, MiCA, and FINMA jurisdictional
+expansions described in \S VIII.
+\end{itemize}
+
+The reciprocal grant runs 99 years, conditional on continued SCLA
+performance.
+
+\textbf{10.} \textbf{Co-branding for Lux-network chains.} All Lux-
+network L1/L2/L3/L4 chains receive explicit co-branding on the
+Counterparty's customer-facing surfaces (marketing, venue chain
+selector, SecurityToken issuance pages, and institutional partnership
+collateral).
+
+\textbf{11.} \textbf{OnyxPlus ID verification at Lux's internal
+cost.} The Counterparty receives access to OnyxPlus
+KYC/AML/document/biometric verification services at Lux's internal
+cost basis, not at market rates.
+
+\textbf{12.} \textbf{AvaTrade routing}: the AvaTrade flow secured by
+Lux is routed through the joint venue post-SCLA; the Counterparty
+receives the proportional benefit of the trading volume on terms
+consistent with the venue's standard listing arrangements.
+
+\textbf{13.} \textbf{8 bps crypto-conversion floor}: Lux's
+infrastructure enables the joint venue to offer crypto-exchange
+conversion at 8 basis points (floor); the Counterparty's existing
+crypto-conversion pricing is repriced to this floor under the SCLA.
+
+\textbf{14.} \textbf{Engineering commitment}: the Counterparty
+activates the Lux Warp precompile (canonical address
+\texttt{0x0200000000000000000000000000000000000005}) on every Liquid
+chain at the next chain-upgrade window. New Liquid chains include
+the \texttt{warpConfig} block in genesis.
+
+\textbf{15.} \textbf{Litigation hold and document preservation}: the
+Counterparty agrees to preserve all records, communications, and
+code-review artifacts relating to the licensing posture from 2014 to
+the SCLA execution date.
+
+\textbf{16.} \textbf{Independent investigation cooperation}: the
+Counterparty cooperates fully with any independent investigation of
+officer conduct undertaken by the disinterested directors or their
+appointed counsel.
+
+% ─────────────────────────────────────────────────────────────────
+\section*{XII.\ Special Note Re: Mr.\ Zach Kelling}
+
+\textbf{Mr.\ Kelling occupies a position requiring particular care
+in Lux's litigation and settlement strategy.} The factual context
+established in \S IV(F) bears directly here: Mr.\ Kelling was the
+\emph{remediator} of the pre-Kelling Counterparty technical and
+security failures (the broken time-price priority matching; the
+\$40,000 ACH-exploit theft) and the architect of the rebuilt platform
+that supports the current \$75M / \$1.1B-valuation raise. He was not the author
+of the conduct giving rise to this matter; he is, if anything, the
+party whose work was misappropriated alongside Lux's.
+
+\textbf{Litigation-strategy implications:}
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.1em]
+\item Mr.\ Kelling should \emph{not} be named as a defendant in any
+Lux suit. The conduct alleged is not his.
+\item Mr.\ Kelling is likely a material witness for Lux on (a) the
+authorship and ownership of the Lux IP, (b) the absence of any
+executed commercial license, and (c) the operational-displacement
+narrative explaining why the mismatch was not raised internally.
+\item Counsel should consider a litigation-cooperation agreement,
+witness-protection arrangement, or formal indemnification of Mr.\
+Kelling (as a non-defendant witness) to ensure his continued
+availability without undue personal exposure.
+\item In any public communication, Lux should take care not to
+attribute the misconduct to Mr.\ Kelling. The narrative should be
+specific to the Counterparty officers actually responsible.
+\item In the SCLA itself, Lux should provide for Mr.\ Kelling's
+protective treatment, including (a) a release of any claims Lux
+might assert against him personally, (b) acknowledgment of his
+historical authorship, and (c) a ROFR / similar mechanism if his
+Counterparty role generates IP that should flow back to Lux upstream.
+\end{itemize}
+
+\textbf{Mr.\ Kelling can serve as a productive intermediary in the
+Lux-Counterparty negotiation}, given his founder status at both
+entities, his historical relationships, and his absence of financial
+interest in the Counterparty. Mr.\ Dupont should consider engaging
+Mr.\ Kelling directly in informational meetings during the
+negotiation phase, subject to outside counsel's oversight.
+
+% ─────────────────────────────────────────────────────────────────
+\section*{XIII.\ Procedural Recommendations}
+
+\textbf{Decision chain:}
+
+\begin{enumerate}[leftmargin=1.5em,itemsep=0.1em]
+\item \textbf{Mr.\ Pahlavi (President \& CEO)} --- final approval
+on any executed SCLA, litigation filing, or strategic public
+communication.
+\item \textbf{Mr.\ Dupont (Managing Partner, Strategic Transactions;
+largest investor)} --- deal lead. Conducts negotiation; selects
+settlement tier; presents executed term sheet to Mr.\ Pahlavi.
+\item \textbf{Mr.\ Donohue (General Counsel)} --- legal lead.
+Drafts SCLA; supervises outside counsel; manages litigation hold;
+leads pre-suit investigation; prepares SCLA for execution.
+\item \textbf{Mr.\ Bin (CTO; memorandum author)} --- operational and
+technical support. Provides factual development on IP portfolio,
+licensing record, and Counterparty-side operational context.
+\end{enumerate}
+
+\textbf{Recommended outside engagement:}
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.1em]
+\item \textbf{Outside litigation counsel}: a firm with DTSA + patent
++ Delaware-fiduciary-duty experience (Wilson Sonsini, Cooley, Fenwick
+\& West, or Quinn Emanuel).
+\item \textbf{Valuation firm}: independent fairness opinion on
+equity-for-IP allocation (Houlihan Lokey, Duff \& Phelps / Kroll, or
+specialist boutique).
+\item \textbf{Investigative firm}: separate firm to investigate
+Counterparty officer conduct (Kroll Investigations, FTI Consulting,
+or specialist tech-IP investigators).
+\end{itemize}
+
+\textbf{Target close: 75 days} from Mr.\ Pahlavi's approval to
+authorize the deal team, per the milestone schedule:
+
+\begin{center}
+\begin{tabular}{lp{10cm}}
+\toprule
+\textbf{Day} & \textbf{Action} \\
+\midrule
+0   & Mr.\ Pahlavi approves; outside counsel engaged. \\
+7   & Litigation hold notice transmitted to Counterparty + named officers. \\
+14  & Investigation firm begins document review. \\
+21  & Term sheet delivered to Counterparty at selected tier. \\
+30  & Counterparty disinterested-director response received. \\
+45  & Investigation report finalized; settlement terms tightened/expanded. \\
+60  & Definitive SCLA executed. \\
+75  & Closing: cash payment, share issuance, license activation. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ─────────────────────────────────────────────────────────────────
+\section*{XIV.\ Prayer for Relief (Template)}
+
+In any litigation, the complaint's prayer will request:
+
+\begin{enumerate}[leftmargin=1.5em,itemsep=0.1em]
+\item Compensatory damages on each Count, anticipated \$80M to \$590M
+on IP claims; \$180M to \$890M with opportunity-cost component.
+\item Disgorgement of unjust enrichment from the current and any future raises (rebased to enterprise value, not round size).
+\item Reasonable royalty (35 U.S.C.\ \S 284; 18 U.S.C.\ \S 1836(b)(3)(B)).
+\item Exemplary damages 2$\times$ on DTSA (18 U.S.C.\ \S 1836(b)(3)(C)).
+\item Treble damages on patent (35 U.S.C.\ \S 284).
+\item Statutory damages on copyright (17 U.S.C.\ \S 504(c)) at elected
+maximum.
+\item Attorneys' fees (18 U.S.C.\ \S 1836(b)(3)(D); 17 U.S.C.\ \S 505;
+35 U.S.C.\ \S 285; 15 U.S.C.\ \S 1117(a)).
+\item Preliminary and permanent injunctive relief enjoining further
+use absent executed commercial license.
+\item Pre- and post-judgment interest.
+\item Such other and further relief as the Court deems just.
+\end{enumerate}
+
+\textbf{Demand for jury trial} on all triable issues.
+
+% ─────────────────────────────────────────────────────────────────
+\vspace{1em}
+\hrule height 0.4pt
+\vspace{0.5em}
+\begin{center}\textbf{\textsc{Schedules}}\end{center}
+\vspace{0.5em}
+
+\section*{Schedule A --- Lux IP Inventory in Production}
+
+The full inventory is maintained at the companion license audit. Headline:
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.1em]
+\item BSD-3 / Apache-2.0 / MIT modules: approximately 25 (no Lux
+action required).
+\item LEL modules: \texttt{aml}, \texttt{broker}, \texttt{captable},
+\texttt{compliance}, \texttt{corona}, \texttt{crypto}, \texttt{fhe},
+\texttt{hsm}, \texttt{maker}, \texttt{mpc}, \texttt{precompile},
+\texttt{ringtail}, \texttt{threshold}, \texttt{transfer},
+\texttt{treasury}, \texttt{warp}.
+\item LRL--PR modules: \texttt{vm}, \texttt{staking}, \texttt{sampler},
+\texttt{dex} (Go bindings).
+\item LGPL modules: \texttt{evm}.
+\item Modules without LICENSE: \texttt{cex} and small number of
+related; counsel should treat as no-rights-granted pending upstream
+remediation.
+\end{itemize}
+
+\section*{Schedule B --- Lux IP Pipeline (Available Under SCLA)}
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.1em]
+\item AI inference and compute precompiles (LP-9080 family).
+\item Advanced ZK rollup substrates.
+\item Post-quantum hybrid signature schemes (X-Wing + ML-KEM; hybrid
+ML-DSA + ECDSA).
+\item Threshold MPC dynamic re-sharing protocols.
+\item Confidential-execution attestation (TEE / SEV-SNP / TDX binding
+to consensus).
+\item White-label partner portal infrastructure.
+\item Closed \texttt{\textasciitilde/work/luxcpp/*} (separate
+Private-Moat Addendum required).
+\end{itemize}
+
+\section*{Schedule C --- Banking License Cost-to-Replicate}
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+\textbf{License} & \textbf{Estimated Cost} \\
+\midrule
+US national or state banking charter & \$20--50M \\
+Canadian Schedule II / partnership & \$10--20M \\
+MAS Capital Markets Services + banking (Singapore) & \$5--10M \\
+RBNZ deposit-taker (New Zealand) & \$5--15M \\
+Sweden Finansinspektionen (EU passport) & \$5--10M \\
+UK FCA EMI / Payment Institution & \$2--5M \\
+Switzerland FINMA digital-asset banking & \$5--15M \\
+Hong Kong SFC Type 1 / Type 7 + VATP & \$5--15M \\
+\midrule
+\textbf{Total direct regulatory + capital} & \textbf{\$57--140M} \\
+Plus 5--7 years of timeline + execution risk & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Schedule D --- Hanzo Inc.\ Portfolio Comparables}
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.1em]
+\item Damon Motorcycles --- electric / smart-motorcycle company.
+\item Triller --- short-form video / social platform.
+\item Bellabeat --- women's health wearables.
+\item Unicorn Gold --- precious-metals tokenization platform.
+\item Lux Network --- subject of this memorandum.
+\item Zoo Labs Foundation / Zoo Network --- decentralized AI research network.
+\end{itemize}
+
+Retained-parent-equity range: 10\%--40\%. The 10\% ask sits at the
+floor of that range.
+
+\section*{Schedule E --- Mandatory Terms (Lux's Floor)}
+
+See \S XI above. Sixteen mandatory terms, summarized:
+
+\begin{enumerate}[leftmargin=1.5em,itemsep=0.05em]
+\item 1 Lux director + 1 independent director seat (closing).
+\item 99-year exclusive USA-market license.
+\item Weighted-average broad-based anti-dilution + full ratchet
+on down-rounds.
+\item Pro-rata participation rights.
+\item Tag-along and co-sale rights.
+\item Information rights.
+\item Patent grant (current and future Lux patents).
+\item Maintenance and support of upstream OSS.
+\item Reciprocal permanent license to Counterparty ATS / BD / TA /
+listed securities / cross-listings.
+\item Co-branding for Lux-network chains.
+\item OnyxPlus ID verification at Lux internal cost.
+\item AvaTrade routing into joint venue.
+\item 8 bps crypto-conversion floor.
+\item Warp precompile activation at next chain-upgrade.
+\item Litigation hold and document preservation.
+\item Independent investigation cooperation.
+\end{enumerate}
+
+\vfill
+\hrule height 0.4pt
+\vspace{0.5em}
+\begin{small}
+\textit{End of memorandum. This document is confidential, privileged,
+and prepared in anticipation of litigation as well as for board
+strategy purposes. The proposed settlement framework is non-binding
+until executed as a definitive Settlement and Cross-License Agreement.
+Distribution outside Lux Industries Inc., its Board of Directors, the
+named decision-chain officers (Messrs.\ Pahlavi, Dupont, Donohue, and
+Bin), and engaged outside counsel requires the express written
+authorization of Mr.\ Pahlavi and Mr.\ Donohue.}
+\end{small}
+
+\end{document}
