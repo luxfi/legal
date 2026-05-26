@@ -13,3 +13,15 @@
 # OS
 .DS_Store
 Thumbs.db
+
+# Brand-separation enforcement: per CLAUDE.md, files mentioning or
+# scoped to Liquidity / Satschel MUST NOT live under ~/work/lux/*.
+# These patterns block accidental git-add of misfiled artifacts.
+LIQUIDITY_*
+liquidity_*
+SATSCHEL_*
+satschel_*
+*Liquidity*.pdf
+*Liquidity*.docx
+*Satschel*.pdf
+*Satschel*.docx
